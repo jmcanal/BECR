@@ -2,38 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4459f533-9758-46aa-b8b9-2306189ec626" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/hashtagemotion/Jan9-2012-tweets-clean.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/preprocessed/emotweets.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/preprocessed/emotweets2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/semeval-2018/2018-E-c-En-dev.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/semeval-2018/2018-E-c-En-test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/semeval-2018/2018-E-c-En-train.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/outputs/semeval16_eng_5pt-openie.op" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/outputs/semeval18_en-openie.op" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/build_emotion_dictionary.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_tweet_emotion_match.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/twitter-emotions.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/twitter-emotions2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/twitter-emotions_hashtag.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/emotion_lexicon_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/zoolia.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/zoolia.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/2_pt/ar/SemEval2017-task4-train.subtask-BD.arabic.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/2_pt/ar/SemEval2017-task4-train.subtask-BD.arabic.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/2_pt/eng/twitter-2015testBD.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/2_pt/eng/twitter-2015testBD.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/2_pt/eng/twitter-2015train-BD.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/2_pt/eng/twitter-2015train-BD.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/2_pt/eng/twitter-2016dev-BD.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/2_pt/eng/twitter-2016dev-BD.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/2_pt/eng/twitter-2016devtest-BD.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/2_pt/eng/twitter-2016devtest-BD.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/2_pt/eng/twitter-2016test-BD.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/2_pt/eng/twitter-2016test-BD.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/2_pt/eng/twitter-2016train-BD.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/2_pt/eng/twitter-2016train-BD.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/5_pt/ar/SemEval2017-task4-train.subtask-CE.arabic.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/5_pt/ar/SemEval2017-task4-train.subtask-CE.arabic.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/5_pt/eng/twitter-2016dev-CE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/5_pt/eng/twitter-2016dev-CE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/5_pt/eng/twitter-2016devtest-CE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/5_pt/eng/twitter-2016devtest-CE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/5_pt/eng/twitter-2016test-CE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/5_pt/eng/twitter-2016test-CE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/5_pt/eng/twitter-2016train-CE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/semeval-2016/5_pt/eng/twitter-2016train-CE.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/eng5dev-openie.op" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/eng5dev-openie.op" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/eng5dev-openie.op" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/run_openie.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/run_openie.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test_tweet_emotion_match.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/test_tweet_emotion_match.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,102 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test_tweet_emotion_match.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
-              <folding>
-                <element signature="e#1#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/twitter-emotions_hashtag.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-85">
-              <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/outputs/semeval18_en-openie.op">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/build_emotion_dictionary.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-              <folding>
-                <element signature="e#104#114#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/23233786/-180110209/scipy/sparse/dok.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/NRC/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="44" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="147" column="8" selection-start-line="147" selection-start-column="8" selection-end-line="147" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/DepecheMood/DepecheMood_freq.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3417">
-              <caret line="3" column="32" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;330947c6-0ebc-49b1-b624-16bc01a2b771&gt;/home2/zoew2/Ling575-IE/code/src/twitter-emotions.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-244498" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;330947c6-0ebc-49b1-b624-16bc01a2b771&gt;/home2/zoew2/Ling575-IE/code/src/CMUTweetTagger.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -201,6 +80,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -211,30 +91,17 @@
             <path>
               <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
               <item name="zoolia" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zoolia" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zoolia" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="emotion_lexicon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zoolia" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="emotion_lexicon" type="462c0819:PsiDirectoryNode" />
-              <item name="DepecheMood" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
               <item name="zoolia" type="462c0819:PsiDirectoryNode" />
               <item name="outputs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zoolia" type="462c0819:PsiDirectoryNode" />
+              <item name="results" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
@@ -245,7 +112,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -257,6 +123,9 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/emotion_lexicon" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="web.server" />
@@ -313,13 +182,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40363000" />
+    <option name="totallyTimeSpent" value="40603000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="803" y="-1088" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="1" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15671642" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16380544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -378,20 +246,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/5_pt/eng/twitter-2016dev-CE.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="1724" column="23" selection-start-line="1724" selection-start-column="23" selection-end-line="1999" selection-end-column="133" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/2_pt/eng/twitter-2016dev-BD.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="2" column="187" lean-forward="true" selection-start-line="2" selection-start-column="187" selection-end-line="2" selection-end-column="187" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data/5_pt/eng/twitter-2016dev-CE.txt" />
+    <entry file="file://$PROJECT_DIR$/data/2_pt/eng/twitter-2016dev-BD.txt" />
     <entry file="file://$PROJECT_DIR$/outputs/test-openie.op">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -399,34 +255,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CMUTweetTagger">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="93" lean-forward="true" selection-start-line="20" selection-start-column="93" selection-end-line="20" selection-end-column="93" />
-          <folding>
-            <element signature="e#372#389#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CMUTweetTagger" />
     <entry file="file://$PROJECT_DIR$/src/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/NRC/nrc_emotion_lexicon_matrix.npy">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/data/twpos-data-v0.3/scripts/toconll.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/NRC/nrc_emotion_lexicon_matrix.npy" />
+    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/data/twpos-data-v0.3/scripts/toconll.sh" />
+    <entry file="file://$PROJECT_DIR$/data/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/lib/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/__init__.py" />
     <entry file="file://$PROJECT_DIR$/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -458,26 +295,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/twokenize.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="96" selection-start-line="5" selection-start-column="81" selection-end-line="5" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/runTagger.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/CMUTweetTagger.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="45" column="38" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
-          <folding>
-            <element signature="e#372#389#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/twokenize.sh" />
+    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/runTagger.sh" />
+    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/CMUTweetTagger.py" />
     <entry file="file://$PROJECT_DIR$/src/twitter-emotions2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -509,30 +329,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/NRC/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="44" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/emotion_dictionary.pkl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/23233786/1035016923/pickle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="1574" column="4" selection-start-line="1574" selection-start-column="4" selection-end-line="1574" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/DepecheMood/DepecheMood_freq.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3417">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/NRC/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt" />
+    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/emotion_dictionary.pkl" />
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/23233786/1035016923/pickle.py" />
+    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/DepecheMood/DepecheMood_freq.txt" />
     <entry file="file://$PROJECT_DIR$/src/twitter-emotions_hashtag.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-85">
@@ -540,13 +340,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/23233786/-180110209/scipy/sparse/dok.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/23233786/-180110209/scipy/sparse/dok.py" />
     <entry file="file://$PROJECT_DIR$/src/build_emotion_dictionary.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
