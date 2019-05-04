@@ -94,5 +94,3 @@ class TweetFile:
 
 
 TweetFile(output_file).get_all_tweets()
-
-
