@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4459f533-9758-46aa-b8b9-2306189ec626" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/emotion_lexicon_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/eng5dev-openie.op" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/eng5dev-openie.op" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/run_openie.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/run_openie.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test_tweet_emotion_match.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/test_tweet_emotion_match.py" afterDir="false" />
+>>>>>>> commiting changes that need to be fixed
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,6 +21,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test_tweet_emotion_match.py">
@@ -108,6 +118,9 @@
         </entry>
       </file>
     </leaf>
+=======
+    <leaf />
+>>>>>>> commiting changes that need to be fixed
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -172,6 +185,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -182,7 +196,21 @@
             <path>
               <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
               <item name="zoolia" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="outputs" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zoolia" type="462c0819:PsiDirectoryNode" />
+              <item name="outputs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zoolia" type="462c0819:PsiDirectoryNode" />
+              <item name="results" type="462c0819:PsiDirectoryNode" />
+>>>>>>> commiting changes that need to be fixed
             </path>
             <path>
               <item name="zoolia" type="b2602c69:ProjectViewProjectNode" />
@@ -193,7 +221,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -205,6 +232,9 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/emotion_lexicon" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="web.server" />
@@ -261,13 +291,16 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="41389000" />
+=======
+    <option name="totallyTimeSpent" value="40603000" />
+>>>>>>> commiting changes that need to be fixed
   </component>
   <component name="ToolWindowManager">
-    <frame x="803" y="-1088" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="1" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15671642" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16380544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -326,20 +359,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/5_pt/eng/twitter-2016dev-CE.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="1724" column="23" selection-start-line="1724" selection-start-column="23" selection-end-line="1999" selection-end-column="133" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/2_pt/eng/twitter-2016dev-BD.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="2" column="187" lean-forward="true" selection-start-line="2" selection-start-column="187" selection-end-line="2" selection-end-column="187" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data/5_pt/eng/twitter-2016dev-CE.txt" />
+    <entry file="file://$PROJECT_DIR$/data/2_pt/eng/twitter-2016dev-BD.txt" />
     <entry file="file://$PROJECT_DIR$/outputs/test-openie.op">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -347,34 +368,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CMUTweetTagger">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="93" lean-forward="true" selection-start-line="20" selection-start-column="93" selection-end-line="20" selection-end-column="93" />
-          <folding>
-            <element signature="e#372#389#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CMUTweetTagger" />
     <entry file="file://$PROJECT_DIR$/src/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/NRC/nrc_emotion_lexicon_matrix.npy">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/data/twpos-data-v0.3/scripts/toconll.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/NRC/nrc_emotion_lexicon_matrix.npy" />
+    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/data/twpos-data-v0.3/scripts/toconll.sh" />
+    <entry file="file://$PROJECT_DIR$/data/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/lib/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/__init__.py" />
     <entry file="file://$PROJECT_DIR$/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -406,26 +408,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/twokenize.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="96" selection-start-line="5" selection-start-column="81" selection-end-line="5" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/runTagger.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/CMUTweetTagger.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="45" column="38" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
-          <folding>
-            <element signature="e#372#389#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/twokenize.sh" />
+    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/runTagger.sh" />
+    <entry file="file://$PROJECT_DIR$/lib/tweet_tagger/CMUTweetTagger.py" />
     <entry file="file://$PROJECT_DIR$/src/twitter-emotions2.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -450,6 +435,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/NRC/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -481,6 +467,27 @@
         </state>
       </provider>
     </entry>
+=======
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="147" column="8" selection-start-line="147" selection-start-column="8" selection-end-line="147" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/NRC/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt" />
+    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/emotion_dictionary.pkl" />
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/23233786/1035016923/pickle.py" />
+    <entry file="file://$PROJECT_DIR$/lib/emotion_lexicon/DepecheMood/DepecheMood_freq.txt" />
+    <entry file="file://$PROJECT_DIR$/src/twitter-emotions_hashtag.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/remote_sources/23233786/-180110209/scipy/sparse/dok.py" />
+>>>>>>> commiting changes that need to be fixed
     <entry file="file://$PROJECT_DIR$/src/build_emotion_dictionary.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
