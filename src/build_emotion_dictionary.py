@@ -19,7 +19,7 @@ class EmoLexicon:
         self.lib_path = '../lib/emotion_lexicon/'
 
     def setup(self, lexicon_file):
-        lines = [line for line in open(lexicon_file, "r")]
+        lines = [line.strip("\n") for line in open(lexicon_file, "r")] # modified to strip newline char
         for item in lines[0].split("\t")[1:]:
             self.emo2idx[item] = len(self.emo2idx.keys())
 
@@ -36,13 +36,13 @@ class EmoLexicon:
 
         numpy_emo_array = self.emotion_lexicon.toarray()
 
-        # np.save(self.lib_path + 'NRC/nrc_emotion_lexicon_matrix.npy', numpy_emo_array)
-        # pickle.dump(self.w2idx, open(self.lib_path + 'NRC/nrc_word_map.pkl', 'wb'))
-        # pickle.dump(self.emo2idx, open(self.lib_path + 'NRC/nrc_emotion_map.pkl', 'wb'))
+        np.save(self.lib_path + 'NRC/nrc_emotion_lexicon_matrix.npy', numpy_emo_array)
+        pickle.dump(self.w2idx, open(self.lib_path + 'NRC/nrc_word_map.pkl', 'wb'))
+        pickle.dump(self.emo2idx, open(self.lib_path + 'NRC/nrc_emotion_map.pkl', 'wb'))
 
-        np.save(self.lib_path + 'DepecheMood/dm_emotion_lexicon_matrix.npy', numpy_emo_array)
-        pickle.dump(self.w2idx, open(self.lib_path + 'DepecheMood/dm_word_map.pkl', 'wb'))
-        pickle.dump(self.emo2idx, open(self.lib_path + 'DepecheMood/dm_emotion_map.pkl', 'wb'))
+        # np.save(self.lib_path + 'DepecheMood/dm_emotion_lexicon_matrix.npy', numpy_emo_array)
+        # pickle.dump(self.w2idx, open(self.lib_path + 'DepecheMood/dm_word_map.pkl', 'wb'))
+        # pickle.dump(self.emo2idx, open(self.lib_path + 'DepecheMood/dm_emotion_map.pkl', 'wb'))
 
 
 def main():
