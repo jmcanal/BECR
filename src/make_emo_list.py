@@ -28,6 +28,7 @@ def create_emo_list(file):
     # for item in delete_list:
     #     emo_set.remove(item)
     print(len(emo_set))
+    print('excitement' in emo_set)
     return emo_set
     # print(emo_set)
 

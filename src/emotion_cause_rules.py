@@ -65,7 +65,7 @@ class Rules():
         prep_conj = ('in', 'about', 'for', 'because', 'from', 'at', 'to')
         # also do negated modals version?
 
-        a = pattern[0][0]
+        a = pattern[0][0].lstrip()
         b = pattern[0][1]
         c = pattern[1][0].lstrip()
         d = pattern[1][1]
@@ -76,16 +76,16 @@ class Rules():
         if a in first_person and d.startswith(verbs) and f.startswith(nominals):
             emo_word = self.check_emos(c)[0]
             if emo_word and e is not "":
-                print("1:", raw_tweet, pattern)
-                print("emotion:", emo_word, "-->  cause:", e, "\n")
+                emo_cause = "emotion: " + emo_word + ", cause: " + e + "\n\n"
+                return ((raw_tweet, emo_cause))
 
         # Example: "Seeing videos of them performing at digi has made
         # me excited to see the jacks in November"
         elif b.startswith(nominals) and c.startswith(make):
             emo_word = self.check_emos(e)[0]
             if emo_word and not emo_word.startswith('sense'):
-                print("2:", raw_tweet, pattern)
-                print("emotion:", emo_word, "-->  cause:", a, "\n")
+                emo_cause = "emotion: " + emo_word + ", cause: " +  a + "\n\n"
+                return ((raw_tweet, emo_cause))
 
         # Example: "Here's a crazy car fact that might surprise you: Volkswagen owns Bentley"
         # In the future try to catch both parts: 1. "crazy car fact" AND 2. "Volkswagen owns Bentley"
@@ -93,17 +93,16 @@ class Rules():
         elif c.startswith(modals) and not e.startswith(openie_markup) and f.startswith(nominals):
             emo_word = self.check_emos(c)[0]
             if emo_word and a not in first_person:
-                print("3:", raw_tweet, pattern)
-                print("emotion:", emo_word, "-->  cause:", a, "\n")
+                emo_cause = "emotion: " + emo_word + ", cause: " + a + "\n\n"
+                return ((raw_tweet, emo_cause))
 
         # Example: "I'm so excited for the new episode of Hannibal tomorrow *cries*"
         elif f.startswith(verbs):
             emo_word, words, i = self.check_emos(e)
             if emo_word and len(words) > i+2:
                 if words[i+1] in prep_conj:
-                    print("4:", raw_tweet, pattern)
-                    print("emotion:", emo_word, "-->  cause:", " ".join(words[i+2:]), "\n")
-
+                    emo_cause = "emotion: " + emo_word + ", cause: " + " ".join(words[i+2:]) + "\n\n"
+                    return ((raw_tweet, emo_cause))
 
 
     def check_emos(self, phrase):
@@ -128,10 +127,19 @@ def main():
     """
 
     tweet_file = sys.argv[1]
+    output = sys.argv[2]
+    tweet_emo_cause = []
+
     patterns, tweet_idx = TweetPatterns(tweet_file).get_patterns()
     for p in patterns:
-        Rules().apply_rules(p, tweet_idx)
+        t_e_c = Rules().apply_rules(p, tweet_idx)
+        if t_e_c:
+            tweet_emo_cause.append(t_e_c)
 
+    with open(output, "w") as out:
+        for line in tweet_emo_cause:
+            out.write(line[0])
+            out.write(line[1])
 
 if __name__ == "__main__":
     main()
