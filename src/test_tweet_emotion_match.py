@@ -16,6 +16,7 @@ emo_matrix = np.load('../lib/emotion_lexicon/DepecheMood/dm_emotion_lexicon_matr
 w2idx = pickle.load(open('../lib/emotion_lexicon/DepecheMood/dm_word_map.pkl', "rb"))
 emo2idx = pickle.load(open('../lib/emotion_lexicon/DepecheMood/dm_emotion_map.pkl', "rb"))
 
+
 class Tweet:
 
     def __init__(self, raw, tags):
@@ -31,13 +32,13 @@ class Tweet:
 
     def process_tweet(self):
         # formatting for semeval 2016 pt eng dataset
-        # self.id, self.topic, self.sentiment, self.tweet_text = self.raw.rstrip().split("\t")
+        self.id, self.topic, self.sentiment, self.tweet_text = self.raw.rstrip().split("\t")
 
         # formatting for hashtag emotion corpus
-        tweet, self.emotion = self.raw.rstrip().split("\t::")
-        tweet_info = tweet.rstrip().split(':\t')
-        self.id = tweet_info[0]
-        self.tweet_text = ' '.join(tweet_info[1:])
+        # tweet, self.emotion = self.raw.rstrip().split("\t::")
+        # tweet_info = tweet.rstrip().split(':\t')
+        # self.id = tweet_info[0]
+        # self.tweet_text = ' '.join(tweet_info[1:])
 
     def get_emotion(self, idx):
         return [e for e, i in emo2idx.items() if i == idx][0]
@@ -69,16 +70,22 @@ class TweetFile:
     def get_all_tweets(self):
         tweet_list = []
         lines = [line for line in open(twitter_file, "r")]
-        tweets = [' '.join(line.split('\t')[1:-1]) for line in lines]
+        # Format for 2018 files
+        # tweets = [' '.join(line.split('\t')[1:-1]) for line in lines]
+        # Format for 2016 files
+        tweets = [' '.join(line.split('\t')[3:]) for line in lines]
+        # print(tweets)
         start = time.time()
         tags = CMUTweetTagger.runtagger_parse(tweets)
+        # print(tags)
         print(time.time() - start)
         for index, line in enumerate(lines):
             tweet = Tweet(line, tags[index])
             word_emos = tweet.get_emotions()
             tweet_list.append((tweet.tweet_text, word_emos, tweet.topic))
+            # print(tweet_list)
         with open(self.output, "w") as f:
-            with open('../data/preprocessed/emotweets_hashtag.txt', 'w') as d:
+            with open('../data/preprocessed/emotweets_2016_train_testing.txt', 'w') as d:
                 tweet_count = 0
                 for tweet in tweet_list:
                     if tweet[1]:
