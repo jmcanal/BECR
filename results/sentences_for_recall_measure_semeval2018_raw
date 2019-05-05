@@ -49,9 +49,6 @@ I hate these hipsters that are occupying Wall Street. Get a job!
 0.22 (I; hate; these hipsters that are occupying Wall Street)
 0.90 (these hipsters; are occupying; Wall Street)
 
-Hmm. I don't hate Finn's voice in this last song. #glee
-0.50 (I; do n't hate; Finn's voice; in this last song)
-
 I hate trucks. I hate truckers. Omg. I hate trucks.
 0.40 Context(I hate,List([15, 21))):(I; hate; trucks)
 0.40 (I; hate; truckers)
