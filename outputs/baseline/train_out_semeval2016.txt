@@ -6,8 +6,8 @@ emotion: hope, cause: that means it's coming via the route
 
 ; A; impulsively bought a docking station for my laptop 'cause I needed one and amazon said it would arrive tomorrow if I ordered now
 emotion: needed, cause: one
-
 I really hope Apple weighs a cup of nuts on the iPhone 6S (9th Generation iPhone)
+
 emotion: hope, cause: Apple weighs a cup of nuts on the iPhone 6S
 
 @tyler_mercado "I hope the Apple event tomorrow is a 6s"
