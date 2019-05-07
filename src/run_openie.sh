@@ -1,7 +1,8 @@
 #!/bin/sh
 
 cd ../../lib/openie
-#java -Xmx10g -XX:+UseConcMarkSweepGC -jar openie-assembly.jar ../../code/data/openie-test.txt ../../code/outputs/eng5dev-openie.op
 
-#java -Xmx10g -XX:+UseConcMarkSweepGC -jar openie-assembly.jar ../../code/data/preprocessed/emotweets.txt ../../code/outputs/eng5dev-openie.op
-java -Xmx10g -XX:+UseConcMarkSweepGC -jar openie-assembly.jar ../../code/data/preprocessed/emotweets2.txt ../../code/outputs/18EnEc-openie.op
+tweets='../../code/data/preprocessed/hashtag-emotweets.txt'
+output='../../code/outputs/openie/hashtag_emo-openie.op'
+
+java -Xmx10g -XX:+UseConcMarkSweepGC -jar openie-assembly.jar ${tweets} ${output}

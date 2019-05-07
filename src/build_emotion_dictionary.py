@@ -10,22 +10,37 @@ import pickle
 
 
 class EmoLexicon:
+
     emotion_lexicon = dok_matrix((0,0), dtype=float)
     emo2idx = {}
     w2idx = {}
 
     def __init__(self, lexicon_file):
+        """
+        Initialize this class with the lexicon file and path
+        :param lexicon_file: the given emotion lexicon
+        """
         self.lexicon = self.setup(lexicon_file)
         self.lib_path = '../lib/emotion_lexicon/'
 
     def setup(self, lexicon_file):
-        lines = [line.strip("\n") for line in open(lexicon_file, "r")] # modified to strip newline char
+        """
+        Set up the emotion to index mapping and strip newlines from lexicon lines
+        :param lexicon_file: the given emotion lexicon
+        :return: the lines from the lexicon without the headers
+        """
+        lines = [line.strip("\n") for line in open(lexicon_file, "r")]
         for item in lines[0].split("\t")[1:]:
             self.emo2idx[item] = len(self.emo2idx.keys())
 
         return lines[1:]
 
     def read_file(self):
+        """
+        Read in the lexicon and create the emotion matrix and the mappings
+        Creates pickles for both maps, and outputs numpy matrix
+        :return: void
+        """
         for line in self.lexicon:
             line_list = line.split()
             word = line_list[0]
