@@ -1,6 +1,8 @@
 #!/bin/sh
 
-raw_tweets='../data/preprocessed/hashtag-raw.txt'
-output_file='../data/preprocessed/hashtag-emotweets.txt'
+original='../data/electoraltweets/batch1.txt'
+raw_tweets='../data/preprocessed/raw/electoral-batch1-raw.txt'
+output_file='../data/preprocessed/filtered/filtered_tweets_labeled_kwsyns.txt'
+debug_file='../data/preprocessed/debug/labeled_debug_kwsyns.txt'
 
-python3 tweet_emotion_filter.py ${raw_tweets} ${output_file}
+python3 filter_by_emotion.py ${original} ${raw_tweets} ${output_file} ${debug_file}

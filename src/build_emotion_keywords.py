@@ -29,11 +29,12 @@ def add_syns(word):
     :param word:
     :return: void
     """
+    global emo_set
     syns = wn.synsets(word)
     va_syns = [syn for syn in syns if syn.pos() in ('v', 'a')]
     for syn in va_syns:
-        lemmas = [lemma.lower() for lemma in syn.lemma_names() if not "_" in lemma]
-        emo_set.union(lemmas)
+        lemmas = set([lemma.lower() for lemma in syn.lemma_names() if not "_" in lemma])
+        emo_set = emo_set.union(lemmas)
 
 
 def main():
@@ -43,7 +44,9 @@ def main():
     """
     raw_emo_list = '../lib/emotion_lexicon/emotion_kw_list/emotion_keywords.txt'
     create_emo_list(raw_emo_list)
-    pickle.dump(emo_set, open('../lib/emotion_lexicon/emotion_kw_list/emotion_keywords.pkl', 'wb'))
+    with open('../lib/emotion_lexicon/emotion_kw_list/emotion_keyword_syns_list.txt', 'w') as f:
+        print("\n".join(emo_set), file=f)
+    pickle.dump(emo_set, open('../lib/emotion_lexicon/emotion_kw_list/emotion_keywords_syns.pkl', 'wb'))
 
 
 if __name__ == "__main__":
