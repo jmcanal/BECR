@@ -1,8 +1,8 @@
 #!/bin/sh
 
-original='../data/electoraltweets/batch1.txt'
-raw_tweets='../data/preprocessed/raw/electoral-batch1-raw.txt'
-output_file='../data/preprocessed/filtered/filtered_tweets_labeled_kwsyns.txt'
-debug_file='../data/preprocessed/debug/labeled_debug_kwsyns.txt'
+#original='../data/hashtagemotion/Jan9-2012-tweets-clean.txt'
+raw_tweets='../data/preprocessed/raw/semeval-2018-all-raw.txt'
+output_file='../data/preprocessed/filtered/filtered_tweets_total.txt'
+debug_file='../data/preprocessed/debug/total_debug.txt'
 
-python3 filter_by_emotion.py ${original} ${raw_tweets} ${output_file} ${debug_file}
+python3 filter_by_emotion.py ${raw_tweets} ${output_file} ${debug_file}

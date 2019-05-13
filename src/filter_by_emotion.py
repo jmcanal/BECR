@@ -22,8 +22,8 @@ class Tweet:
     # w2idx = pickle.load(open('../lib/emotion_lexicon/NRC/nrc_word_map.pkl', "rb"))
     # emo2idx = pickle.load(open('../lib/emotion_lexicon/NRC/nrc_emotion_map.pkl', "rb"))
 
-    emo_list = pickle.load(open('../lib/emotion_lexicon/emotion_kw_list/emotion_keywords_syns.pkl', "rb"))
-    # emo_list = pickle.load(open('../lib/emotion_lexicon/emotion_kw_list/emotion_keywords.pkl', "rb"))
+    # emo_list = pickle.load(open('../lib/emotion_lexicon/emotion_kw_list/emotion_keywords_syns.pkl', "rb"))
+    emo_list = pickle.load(open('../lib/emotion_lexicon/emotion_kw_list/emotion_keywords.pkl', "rb"))
 
     def __init__(self, tweet, tags):
         """
@@ -31,18 +31,19 @@ class Tweet:
         :param tweet: the given tweet
         :param tags: pos tags for the tweet
         """
-        # self.tweet = tweet
+        self.tweet = tweet
         # self.words = self.tweet.split()
         self.tagged = tags
         self.words = [t[0] for t in tags]
-        tweet_info = tweet.split("\t")
-        self.tweet = tweet_info[13]
-        self.source = tweet_info[14]
-        self.emotions = tweet_info[15].split(' or ')
-        self.other_emotion = tweet_info[16]
-        self.target = tweet_info[19]
-        self.emo_word = tweet_info[20]
-        self.cause = tweet_info[21]
+        # tweet_info = tweet.split("\t")
+        # hashtag: 1, semeval: 3, electoral: 13
+        # self.tweet = tweet_info[1]
+        # self.source = tweet_info[14]
+        # self.emotions = tweet_info[15].split(' or ')
+        # self.other_emotion = tweet_info[16]
+        # self.target = tweet_info[19]
+        # self.emo_word = tweet_info[20]
+        # self.cause = tweet_info[21]
 
     def get_emotion(self, idx):
         """
@@ -104,14 +105,14 @@ class Tweet:
 
 class TweetFile:
 
-    def __init__(self, original_file, raw_tweets):
+    def __init__(self, raw_tweets):
         """
         Initialize by saving a list of the raw tweets
         :param raw_tweets: tweet file
         """
-        tweets = [line for line in open(raw_tweets, "r")]
-        self.tags = CMUTweetTagger.runtagger_parse(tweets)
-        self.tweets = [line for line in open(original_file, "r")][1:]
+        self.tweets = [line for line in open(raw_tweets, "r")]
+        self.tags = CMUTweetTagger.runtagger_parse(self.tweets)
+        # self.tweets = [line for line in open(original_file, "r")][1:]
 
     def filter_tweets(self, debug_file):
         """
@@ -127,12 +128,12 @@ class TweetFile:
                     print("WORD(S):", file=d)
                     for item in tweet.get_emotions():
                         print(item, file=d)
-                    print("EMOTIONS", ", ".join(tweet.emotions), file=d)
-                    print("OTHER EMOTION", tweet.other_emotion, file=d)
-                    print("CLUE", tweet.emo_word, file=d)
-                    print("SOURCE", tweet.source, file=d)
-                    print("TARGET", tweet.target, file=d)
-                    print("CAUSE", tweet.cause, file=d)
+                    # print("EMOTIONS", ", ".join(tweet.emotions), file=d)
+                    # print("OTHER EMOTION", tweet.other_emotion, file=d)
+                    # print("CLUE", tweet.emo_word, file=d)
+                    # print("SOURCE", tweet.source, file=d)
+                    # print("TARGET", tweet.target, file=d)
+                    # print("CAUSE", tweet.cause, file=d)
                     print("\n", file=d)
                     tweet_list.append(tweet.tweet.rstrip())
         return "\n".join(tweet_list)
@@ -144,12 +145,12 @@ def main():
     :return: void
     """
 
-    original_tweets = sys.argv[1]
-    raw_tweets = sys.argv[2]
-    output_file = sys.argv[3]
-    debug_file = sys.argv[4]
+    # original_tweets = sys.argv[1]
+    raw_tweets = sys.argv[1]
+    output_file = sys.argv[2]
+    debug_file = sys.argv[3]
 
-    tf = TweetFile(original_tweets, raw_tweets)
+    tf = TweetFile(raw_tweets)
     with open(output_file, 'a+') as out:
         print(tf.filter_tweets(debug_file), file=out)
 
