@@ -7,10 +7,14 @@ import pickle
 from nltk.corpus import wordnet as wn
 
 emo_set = set()
+exclusions = ['have', 'make', 'catch', 'see', 'support',
+              'start', 'take', 'use', 'put', 'replaced',
+              'lost', 'right', 'used', 'replaced']
 
 def create_emo_list(keyword_file):
     """
-    Create a list of emotion keywords by cleaning the given list and expanding using synsets from Wordnet
+    Create a list of emotion keywords by cleaning the given list
+    and expanding using synsets from Wordnet
     :param keyword_file: the given file of emotion keywords
     :return: void
     """
@@ -19,7 +23,8 @@ def create_emo_list(keyword_file):
         kw = kw.split()
         if not len(kw) > 1:
             word = kw[0].lower()
-            emo_set.add(word)
+            if word not in exclusions:
+                emo_set.add(word)
             add_syns(word)
 
 
@@ -33,8 +38,9 @@ def add_syns(word):
     syns = wn.synsets(word)
     va_syns = [syn for syn in syns if syn.pos() in ('v', 'a')]
     for syn in va_syns:
-        lemmas = set([lemma.lower() for lemma in syn.lemma_names() if not "_" in lemma])
-        emo_set = emo_set.union(lemmas)
+        lemmas = [lemma.lower() for lemma in syn.lemma_names() if not "_" in lemma
+                  and lemma.lower() not in exclusions]
+        emo_set.union(lemmas)
 
 
 def main():

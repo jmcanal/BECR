@@ -110,7 +110,7 @@ class TweetFile:
         Initialize by saving a list of the raw tweets
         :param raw_tweets: tweet file
         """
-        self.tweets = [line for line in open(raw_tweets, "r")]
+        self.tweets = [line for line in open(raw_tweets, encoding = "ISO-8859-1")]
         self.tags = CMUTweetTagger.runtagger_parse(self.tweets)
         # self.tweets = [line for line in open(original_file, "r")][1:]
 
@@ -120,7 +120,10 @@ class TweetFile:
         :return: string of tweets containing emotion words
         """
         tweet_list = []
-        with open(debug_file, 'a+') as d:
+        start = time.time()
+        tags = CMUTweetTagger.runtagger_parse(self.tweets)
+        print(time.time() - start)
+        with open('emo_debug.txt', 'w') as d:
             for index, line in enumerate(self.tweets):
                 tweet = Tweet(line, self.tags[index])
                 if tweet.get_emotions():
