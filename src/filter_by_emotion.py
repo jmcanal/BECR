@@ -212,8 +212,8 @@ def main():
         for tags in tf.tag_list:
             tagged_toks = []
             for tuple in tags:
-                word = tuple[0].encode('utf-8').decode('latin1')
-                tag = tuple[1].encode('utf-8').decode('latin1')
+                word = tuple[0].encode('latin-1', 'ignore').decode('latin-1')
+                tag = tuple[1].encode('latin-1', 'ignore').decode('latin-1')
                 tagged_toks.append("{}:{}".format(word, tag))
             print(" ".join(tagged_toks), file=tok)
 
