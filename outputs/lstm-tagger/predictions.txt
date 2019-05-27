@@ -1,0 +1,150 @@
+sentence: got:V excited:V because:P we:O had:V chex:N mix:N at:P home:N ...:, opened:V the:D bag:N and:& realized:V someone:N ate:V all:X the:D good:A stuff:N and:& just:R left:V chex:N .:,
+prediction: O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O B-E O B-C I-C I-C I-C I-C I-C O O O O O O O O O O O O O O O O O
+sentence: I:O didn't:V watch:V Sharknado:^ 3:$ because:P I:O never:R saw:V the:D 2nd:$ movie:N and:& thought:V I'd:L be:V lost:A .:,
+prediction: O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O
+sentence: It's:L a:D 3rd:$ day:N of:P Eid:^ .:, We:O are:V blessed:A with:P nice:A weather:N and:& owsum:V feeling:V of:P freshness:N .:, Alhamdulillah:!
+prediction: O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O
+sentence: Far:A to:P tired:V to:P go:V and:& sit:V about:P in:P a:D doctos:N waiting:V room:N all:D afternoon:N
+prediction: O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O B-E O B-C I-C I-C I-C I-C I-C I-C I-C I-C I-C I-C
+sentence: ":, And:& if:P it:O being:V Sunday:^ weren't:V enough:R to:P make:V you:O happy:A ,:, Hip:^ Hip:^ Hooray:! for:P National:^ Ice:^ Cream:^ Day:^ .:, Follow:V us:O all:D ...:~ http://t.co/BXk8eP8yjp:U ":,
+prediction: O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O B-C I-C I-C O O O O O B-E O O O O O O O O O O O O O O O O
+sentence: I:O am:V honored:A to:P say:V I:O drove:V Chelsea:^ tonight:R may:V god:^ bless:V @BallerJake:@
+prediction: O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O B-E O O B-C I-C I-C I-C O O O O
+sentence: When:R you've:L still:R got:V a:D whole:A season:N of:P Wentworth:^ to:P watch:V and:& a:D stupid:A cunt:N in:P work:N ruins:V it:O for:P us:O 😭😭:G @__KirstyGA:@ #raging:V #oldcunt:#
+prediction: O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: @ben_fothz_92:@ surprise:N ,:, i:O knew:V that:O was:V coming:V ,:, lol:! .:, i've:L made:V a:D good:A few:N actually:R #fact:# x:E
+prediction: O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O B-E O B-C I-C I-C I-C I-C O O O O O O O O O O O
+sentence: Rick:^ Perry:^ was:V going:V to:P go:V on:P Are:V You:O Smarter:R Than:P a:D 5th:A Grader:N ?:, to:P win:V money:N to:P continue:V his:D campaign:N ,:, but:& he's:L embarrassed:V himself:O enough:R .:,
+prediction: O O O O O O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O B-E B-C O O
+sentence: Nail:N polishes:N hate:V me:O tonight:R
+prediction: O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O B-E B-C O
+sentence: I:O really:R hope:V that:P Obama:^ attends:V Serena's:Z match:N on:P Saturday:^ ...:, Ciara's:Z doing:V the:D National:N Anthem:N .:, Give:V us:O deze:N ratings:N biches:N .:,
+prediction: O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O
+sentence: ":, Raissman:^ ::, Frank:^ Gifford:^ made:V Monday:^ Night:N Football:N work:N ::, Gifford:^ ,:, who:O died:V Sunday:^ morning:N of:P natural:A causes:N at:P age:N 84:$ ,:, was:V one:$ of:P the:D ...:~ ":,
+prediction: O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: @bollybrit:@ @itsnacool:@ both:O of:P webb:^ ones:N made:V less:A money:N than:P the:D 3rd:A Raimi:^ one:$ ,:, plus:P the:D success:N of:P Marvel:^ had:V Sony:^ scared:A i:O think:V
+prediction: O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O B-C I-C I-C I-C O O B-E O O
+sentence: The:D awkward:A moment:N when:R you:O wake:V up:T with:P a:D snake:N wraped:V around:P your:D hair:N ...:,
+prediction: O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O B-E O O B-C I-C I-C I-C I-C I-C I-C I-C I-C I-C O
+sentence: @GirlPosts:@ @_matdtaylor:@ actually:R how:R annoyed:V you:O get:V 😂:O
+prediction: O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O B-E O O O
+sentence: Kendrick:^ Lamar:^ released:V Black:^ Friday:^ approximately:R 6:$ days:N ago:R I:O have:V listened:V to:P it:O precisely:R 10485839193847:$ times:N since:P then:R
+prediction: O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O
+sentence: @mrjamesob:@ @LBC:@ 😂:^ snowflake:^ random:A such:A a:D funny:A man:N never:R a:D dull:A moment:N brilliant:A
+prediction: O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O
+sentence: I:O should:V be:V getting:V into:P bed:N ,:, I:O am:V however:R instead:R looking:V through:P my:D iPod:^ for:P songs:N I:O might:V want:V to:P pole:N to:P .:, I:O may:V be:V addicted:A .:,
+prediction: O O O O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: I'm:L home:N watchin:V this:D sad:A movie:N .:, Missing:V college:N .:,
+prediction: O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O B-E B-C O O O O
+sentence: @KevinLive5:@ thanks:N !:, I:O know:V you:O would:V have:V the:D answer:N .:, Hope:V all:X is:V well:R !:, I'm:L sure:A Sting:N last:A Monday:^ had:V you:O jacked:V up:T with:P energy:N !:,
+prediction: O O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: Jeb:^ Bush:^ may:V have:V lots:N of:P cash:N and:& great:A political:A organization:N but:& don't:V compare:V him:O to:P Romney:^ .:, He:O doesn't:V have:V the:D moxie:N needed:V today:N !:,
+prediction: O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: ":, Thank:V you:O @RocksteadyGames:@ !:, Instead:R of:P beating:V up:T bad:A guys:N ,:, Batman:^ is:V beating:V up:T my:D PS4:N .:, This:O is:V the:D 3rd:A time:N your:D game:N crashed:V my:D PS4:N .:, ":,
+prediction: O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: ":, your:D right:A David:^ Price:^ win:V tomorrow:N ,:, I:O hope:V we:O win:V .:, I:O just:R prayed:V my:D rosary:N .:, soo:R i:O still:R believe:V in:P you:O Jays:^ .:, go:V jay:^ https://t.co/QXAf3RDYbc:U ":,
+prediction: O O O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: @TauDeltaPhiDK:@ THANK:V YOU:O FOR:P MY:D OBAMA:^ CUT:V OUT:T !!!!!!:, I:O am:V elated:A that:P he's:L back:R home�:G
+prediction: O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O B-E O B-C I-C I-C
+sentence: the:D lucky:A $2:$ bills:N will:V be:V joining:V me:O at:P digi:N tomorrow:N
+prediction: O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O
+sentence: @denisenery:@ even:R more:R sad:A !:, I:O remember:V waking:V up:T extra:A early:A during:P high:A school:N just:R to:P listen:V to:P his:D show:N .:,
+prediction: O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O B-E I-E I-E O B-C I-C I-C I-C I-C I-C I-C I-C I-C I-C I-C I-C I-C I-C I-C O
+sentence: @SXMUrbanView:@ @karenhunter:@ @CousinSyl:@ you:O are:V so:R wrong:A for:P this:O !:, needed:V levity:N after:P that:O recording:V
+prediction: O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O
+sentence: Life:N report:N ::, toddler:N has:V temperature:N ,:, baby:N possibly:R in:P growth:N spurt:N ,:, wife:N v:P tired:A ,:, I:O have:V a:D cold:A and:& am:V just:R about:P to:P walk:V dog:N in:P rain:N .:,
+prediction: O O O O O O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O B-E I-E O O O O O O O O O O O O O O O
+sentence: Pizza:^ for:P dinner:N and:& watching:V Jurassic:^ World:^ .:, Pretty:R good:A way:N to:P spend:V a:D Friday:^ night:N if:P you:O ask:V me:O
+prediction: O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O
+sentence: GOP:N hopeful:A Kasich:^ files:N for:P 1st-in-the-South:$ primary:A ::, Ohio:^ Gov:^ .:, John:^ Kasich:^ on:P Monday:^ landed:V the:D endo:N ...:, http://t.co/8vGCpR2J9N:U #HINews:#
+prediction: O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O
+sentence: I'm:L so:R afraid:A of:P viruses:N now:R .:, why:R did:V he:O have:V to:P watch:V this:D video:N ?!:,
+prediction: O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O B-E I-E O B-C O O O O O O O O O O O
+sentence: great:A RAW:A tonight:N ...:, 1st:A the:D Dudley:^ Boys:N and:& then:R to:P end:V with:P Sting:N !!!:, #WWERaw:# #WWE:#
+prediction: O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O
+sentence: If:P Airbnb:^ is:V good:A enough:N for:P Mariah:^ Carey:^ ,:, It:O may:V be:V good:A enough:N for:P you:O .:, $25:$ Travel:N Coupon:N http://t.co/f3B3bdlvCm:U http://t.co/AydJRfN1ys:U
+prediction: O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O
+sentence: I:O am:V so:R confused:A by:P this:D David:^ Bowie:^ musical:A .:, Is:V it:O really:R done:V forever:R after:P Jan:^ 20th:$ ?:, Or:& will:V it:O be:V back:R for:P a:D full:A run:N ???:,
+prediction: O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O B-E I-E O B-C I-C I-C I-C O O O O O O O O O O O O O O O O O O O O
+sentence: And:& my:D mind:N and:& my:D soul:N .:, Who:O made:V him:O substitute:N for:P my:D brothers:N and:& near:P me:O for:P all:D the:D beautiful:A days:N and:& I:O found:V you:O lost:V and:& grabbed:V
+prediction: O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: ':, This:D one:$ ?:, ':G \n'A:^ bit:R odd:A looking:V isn't:V he:O ?:, Pointy:N .:, ':, The:D alien:N asked:V .:, \n'Perhaps:& .:, But:& he'll:L be:V #wonderful:A .:, He's:L from:P the:D Steve:^ pile:N .:, ':, #vss365:#
+prediction: O O O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: i:O love:V coming:V home:N ,:, weighing:V myself:O and:& seeing:V I've:L lost:A weight:N
+prediction: O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O B-E B-C I-C I-C I-C I-C I-C I-C I-C I-C I-C
+sentence: I:O hate:V you:O @Adobe:@ ,:, u:O crash:V more:R then:R any:D other:A application:N Tho:P @Microsoft:@ office:N ur:L close:A 2nd:$ U:O both:O can:V share:V #firstplace:# 4:P my:D dislike:N 2day:N
+prediction: O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O B-E B-C O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: Seriously:R though:R ,:, if:P you:O hate:V Ireland:^ so:R much:R ,:, fucking:R leave:V .:,
+prediction: O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O B-E B-C O O O O O O
+sentence: Really:R excited:V about:P Apple:^ Announcing:V iPad:^ Pro:^ tomorrow:N .:, Ah:! ,:, the:D rumor:N I've:L been:V wanting:V to:P be:V true:A for:P years:N .:, It:O ...:, http://t.co/BNFovY0ZBZ:U
+prediction: O O O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: B-E I-E O B-C I-C I-C I-C I-C O O O O O O O O O O O O O O O O O
+sentence: @RealTimBooth:@ I've:L never:R been:V fond:N of:P having:V dark:A eyes:N until:P seeing:V this:D share:N .:,
+prediction: O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O B-E O B-C I-C I-C O O O O O
+sentence: @persecutionnews:@ Pray:V for:P Christians:^ everywhere:R that:P are:V being:V persecuted:V .:, We:O never:R know:V when:R it:O may:V be:V us:O that:O is:V in:P their:D shoes:N .:,
+prediction: O O O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: I:O am:V honored:A to:P say:V I:O drove:V Chelsea:^ tonight:R may:V god:^ bless:V @BallerJake:@
+prediction: O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O B-E O O B-C I-C I-C I-C O O O O
+sentence: I:O want:V to:P see:V what:D life:N is:V like:P without:P fear:N !:, What:O can:V i:O achieve:V if:P I:O weren't:V afraid:A !!?:,
+prediction: O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O B-E O O O O O O O O B-E O
+sentence: I'm:L so:R excited:A for:P the:D new:A iphone:^ release:N tomorrow:N yas:! .:,
+prediction: O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O B-E I-E O B-C I-C I-C I-C I-C O O
+sentence: Me:O ::, I:O want:V two:$ horses:N .:, Bud:^ ::, Well:! that's:L good:A ,:, we:O can:V get:V them:O with:P the:D money:N that's:L growing:V from:P the:D ground:N .:, SARCASM:N IS:V NOT:R REQUIRED:V !:,
+prediction: O O O O O O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O O
+sentence: @ZinedineHimovic:@ you're:L Floyd:^ may:^ weather:^ and:& I'm:L 50:$ cent:N don't:V make:V me:O force:V you:O to:P read:V full:A sentences:N from:P Harry:^ Potter:^
+prediction: O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O O O
+sentence: Club:N Night:N tonight:N @:P Loe:^ Beach:^ is:V CANCELLED:V due:A to:P horrible:A ,:, horrendous:A ,:, inclement:A weather:N !!:,
+prediction: O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O
+sentence: Some:D band:N nearby:A playing:V U2's:Z Sunday:^ Bloody:A Sunday:^ .:, That's:L better:A than:P the:D terrible:A music:N my:D neighbors:N usually:R play:V
+prediction: O O O O O O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O O O O O O O O
+sentence: It's:L a:D good:A day:N when:R @nicap18:@ shows:V up:T at:P your:D door:N !!!:,
+prediction: O O O O O O O O O O O O O -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD- -PAD-
+gold: O O O O O O O O O O O O
