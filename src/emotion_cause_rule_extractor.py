@@ -50,6 +50,14 @@ class Word:
 
     def get_children(self):
         return ", ".join([w.text for w in self.children])
+    
+    def __lt__(self, other):
+        """
+        Words are ordered by their alphanumeric order
+        :param other:
+        :return:
+        """
+        return self.text < other.text
 
 
 class GetTweets:
@@ -163,21 +171,46 @@ def apply_rules(emo_word):
         return emo_word, None
 
     if deps:
-        return emo_word, " ".join(deps)
+        return emo_word, " ".join([d.text for d in deps])
     else:
         return emo_word, None
 
 def sort_dependencies(word, rule):
+    noun_verb = ['^', 'O', 'D', 'V', '$', 'N']
+    prep_conj = ['P', 'R', 'T']
+
     deps = sorted(get_dependencies(word, {}).items())
-    LHS = [d.text for (i, d) in deps if i < word.idx]
-    RHS = [d.text for (i, d) in deps if i > word.idx]
+    LHS_pre = [d for (i, d) in deps if i < word.idx]
+    RHS_pre = [d for (i, d) in deps if i > word.idx]
+
+    LHS = strip_prepositions(LHS_pre) if LHS_pre else None
+    RHS = strip_prepositions(RHS_pre) if RHS_pre else None
 
     if rule == 1 or rule == 3 or rule == 5:
+        # if RHS:
+        #     print(word, RHS[0].pos, [(w.text, w.pos) for w in RHS],[(w.text, w.pos) for w in RHS_pre])
         return RHS
     elif rule == 2 or rule == 4:
+        # if LHS:
+        #     print(word, LHS[0].pos, [(w.text, w.pos) for w in LHS], [(w.text, w.pos) for w in LHS_pre])
         return LHS
     else:
         return 'invalid rule'
+
+
+def strip_prepositions(phrase):
+    # Strip prepositions, conjunctions from dependent phrase
+    prep_conj = ['P', 'R', 'T']
+
+    if phrase:
+        if phrase[0].pos in prep_conj:
+            return strip_prepositions(phrase[1:])
+        else:
+            return phrase
+    else:
+        return None
+
+
 
 
 def main():
@@ -190,223 +223,27 @@ def main():
     # output = sys.argv[3]
     emo_words, idx2tweets = GetTweets(parsed_tweet_file).create_words()
 
+    emo_list = []
+
     for sent_id, words in emo_words.items():
-        print("\nsentence_{}".format(sent_id), idx2tweets[sent_id])
+        # print("\nsentence_{}".format(sent_id), idx2tweets[sent_id])
         for word in words:
             emo, cause = apply_rules(word)
             if cause:
-                print("EMOTION:", emo, "CAUSE", cause)
+                print("EMOTION:", emo.text, "CAUSE", cause)
+                emo_list.append((emo.text, cause, idx2tweets[sent_id]))
             elif emo:
-                print("EMOTION:", emo, "NO CAUSE FOUND")
+                # print("EMOTION:", emo, "NO CAUSE FOUND")
+                continue
             else:
-                print("NO EMOTION FOUND / NO CAUSE FOUND")
+                # print("NO EMOTION FOUND / NO CAUSE FOUND")
+                continue
 
-    # tp = TweetPatterns(raw_tweet_file, parsed_tweet_file)
-    # rules = EmotionCauseRuleExtractor(tp.tweets)
-    # for p in tp.patterns:
-    #     emotion_cause = rules.apply_rules(p)
-    #     if emotion_cause:
-    #         tweet_emo_cause.append(emotion_cause)
-    # 
-    # with open(output, "w") as out:
-    #     for line in tweet_emo_cause:
-    #         print(line[0], file=out)
-    #         print(line[1], file=out)
+    # emo_list = sorted(emo_list)
+    # with open(sys.argv[2], 'w') as out:
+    #     for pair in emo_list:
+    #         out.write("EMOTION: " + pair[0] + " CAUSE: " + pair[1] + " SENTENCE: " + pair[2] + "\n")
 
-
-class EmotionCauseRuleExtractor:
-    """
-    Apply rules to extract emotion causes from tweets
-    """
-
-    FIRST_PERSON = ('I', 'i')
-    NOMINALS = ('JJ', 'NN', 'PRP')
-    VERBS = ('VB', 'MD')
-    MAKE = ('makes', 'made', 'has made', 'have made', 'will make')
-    MODALS = ('may', 'might', 'could', 'should', 'would', 'will')
-    OPENIE_MARKUP = ('L:', 'T:')
-    PREP_CONJ = ('in', 'about', 'for', 'because', 'from', 'at', 'to')
-    # TODO: negated modals
-
-    def __init__(self, tweets):
-        """
-        Initialize this class by storing tweets
-        :param tweets:
-        """
-        self.tweets = tweets
-        self.rule_list = []
-
-    def is_ifeel(self, phrase1, phrase2, tag2, tag3):
-        """
-        Is this an 'ifeel' causal relation?
-
-        Example: I love Bernie Sanders
-
-        :param phrase1: the first phrase
-        :param phrase2: the second phrase
-        :param tag2: pos tags for the second phrase
-        :param tag3: pos tags for the third phrase
-        :return: bool
-        """
-        right_form = phrase1 in self.FIRST_PERSON \
-                     and tag2.startswith(self.VERBS) \
-                     and tag3.startswith(self.NOMINALS)
-
-        return right_form and self.get_emotion_word(phrase2)
-
-    def is_itmakes(self, phrase2, phrase3, tag1):
-        """
-        Is this an 'itmakes' causal relation?
-
-        Example: Seeing videos of them performing at digi has made me excited to see the jacks in November
-
-        :param phrase2: the second phrase
-        :param phrase3: the third phrase
-        :param tag1: pos tags for the first phrase
-        :return: bool
-        """
-        right_form = tag1.startswith(self.NOMINALS) \
-                     and phrase2.startswith(self.MAKE)
-
-        return right_form and not phrase3.startswith('sense')
-
-    def is_modnom(self, phrase1, phrase2, phrase3, tag3):
-        """
-        Is this a 'modnom' causal relation?
-
-        Example: Here's a crazy car fact that might surprise you: Volkswagen owns Bentley
-        Example: The results may surprise you.
-
-        :param phrase1: the first phrase
-        :param phrase2: the second phrase
-        :param phrase3: the third phrase
-        :param tag3: pos tags for the third phrase
-        :return: bool
-        """
-        right_form = phrase2.startswith(self.MODALS) \
-                     and not phrase3.startswith(self.OPENIE_MARKUP) \
-                     and tag3.startswith(self.NOMINALS)
-
-        return right_form and phrase1 not in self.FIRST_PERSON
-
-    def is_emoverb(self, phrase3, tag3):
-        """
-        is this an 'emoverb' causal relation?
-
-        Example: I'm so excited for the new episode of Hannibal tomorrow *cries*
-
-        :param phrase3: the third phrase
-        :param tag3: pos tags for the third phrase
-        :return: bool
-        """
-        right_form = tag3.startswith(self.VERBS)
-        return right_form and self.get_emotion_word(phrase3) and not (set(self.PREP_CONJ) & set(phrase3.split()))
-
-    def apply_ifeel_rule(self, phrase2, phrase3):
-        """
-        Extract the emotion and cause for 'ifeel' causal relation
-
-        Example: I love Bernie Sanders
-
-        :param phrase2: the second phrase
-        :param phrase3: the third phrase
-        :return: the emotion word and cause
-        """
-        emo_word = self.get_emotion_word(phrase2)[0]
-        if not emo_word:
-            return False, phrase3
-        return emo_word, phrase3
-
-    def apply_itmakes_rule(self, phrase1, phrase3):
-        """
-        Extract the emotion and cause for 'itmakes' causal relation
-
-        Example: Seeing videos of them performing at digi has made me excited to see the jacks in November
-
-        :param phrase1: the first phrase
-        :param phrase3: the third phrase
-        :return: the emotion word and cause
-        """
-        emo_word = self.get_emotion_word(phrase3)[0]
-        if not emo_word:
-            return False, phrase1
-        return emo_word, phrase1
-
-    def apply_modnom_rule(self, phrase1, phrase2):
-        """
-        Extract the emotion and cause for 'modnom' causal relation
-
-        Example: Here's a crazy car fact that might surprise you: Volkswagen owns Bentley
-        Example: The results may surprise you.
-
-        :param phrase1: the first phrase
-        :param phrase2: the second phrase
-        :return: the emotion word and cause
-        """
-        emo_word = self.get_emotion_word(phrase2)[0]
-        if not emo_word:
-            return False, phrase1
-        return emo_word, phrase1
-
-    def apply_emoverb_rule(self, phrase3):
-        """
-        Extract the emotion and cause for 'emoverb' causal relation
-
-        Example: I'm so excited for the new episode of Hannibal tomorrow *cries*
-
-        :param phrase3: the third phrase
-        :return: the emotion word and cause
-        """
-        emo_word, words, i = self.get_emotion_word(phrase3)
-        if not emo_word or len(words) <= i + 2:
-            return False, phrase3
-        return emo_word, " ".join(words[i+2:])
-
-    def apply_rules(self, tweet_triple):
-        """
-        Try to apply the rules to extract emotion and cause from the given relation triple
-        :param tweet_triple: the relation triple from OpenIE
-        :return: string of emotion and cause
-        """
-        # These rules are set up for NLTK POS tag matching
-        emotion = cause = False
-        idx, pattern = tweet_triple
-
-        phrases, tags = zip(*pattern)
-        phrase1, phrase2, phrase3, *rest = phrases
-        tag1, tag2, tag3, *rest = tags
-
-        if self.is_ifeel(phrase1, phrase2, tag2, tag3):
-            emotion, cause = self.apply_ifeel_rule(phrase2, phrase3)
-
-        if not emotion and self.is_itmakes(phrase2, phrase3, tag1):
-            emotion, cause = self.apply_itmakes_rule(phrase1, phrase3)
-
-        if not emotion and self.is_modnom(phrase1, phrase2, phrase3, tag3):
-            emotion, cause = self.apply_modnom_rule(phrase1, phrase2)
-
-        if not emotion and self.is_emoverb(phrase3, tag3):
-            emotion, cause = self.apply_emoverb_rule(phrase3)
-
-
-        if not emotion or not cause:
-            return None
-
-        emo_cause = "emotion: " + emotion + ", cause: " +  cause + "\n"
-        return self.tweets[idx], emo_cause
-
-
-    def get_emotion_word(self, phrase):
-        """
-        Get the emotion word and index from the given phrase
-        :param phrase: the phrase
-        :return: emotion word, list of words in the phrase, index of emotion word
-        """
-        words = phrase.split()
-        for i, word in enumerate(words):
-            if word in emo_kws:
-                return word, words, i
-        return False, words, -1
 
 if __name__ == "__main__":
     main()

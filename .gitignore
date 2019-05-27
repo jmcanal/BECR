@@ -15,6 +15,7 @@ downloads/
 eggs/
 .eggs/
 lib/openie
+lib/glove
 lib64/
 parts/
 sdist/
