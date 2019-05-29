@@ -42,7 +42,6 @@ class Word:
         # print("TEST", self.idx, child, self.children)
 
     def has_children(self):
-        # print("CHILDREN", self.children)
         return len(self.children) > 0
 
     def __str__(self):
@@ -107,7 +106,6 @@ class GetTweets:
         return self.tweet_idx_2_emo_words, self.idx2tweet
 
     def add_relatives(self):
-        # print(self.idx2word)
         for child, parent in self.child2parent.items():
             if parent != 0 and parent != -1:
                 parent_word = self.idx2word[parent]
@@ -125,16 +123,14 @@ def get_dependencies(word_list, deps):
         return get_dependencies(word_list, deps)
     else:
         word = word_list.pop()
-        # print(word.children)
         word_list.extend(word.children)
         deps[word.idx] = word
         return get_dependencies(word_list, deps)
 
+
 def apply_rules(emo_word):
     deps = []
     MODALS = ('may', 'might', 'could', 'should', 'would', 'will')
-    MAKE = ('makes', 'made', 'make')
-    TENSE = ('will', 'has', 'had')
     if emo_word.pos == 'V' and emo_word.has_children():
         if emo_word.parent == 0:
             # Apply Rule 1
@@ -149,24 +145,9 @@ def apply_rules(emo_word):
             # Example: "exhausted from putting groceries away"
             deps = sort_dependencies(emo_word, 3)
     elif emo_word.pos == 'A' and emo_word.has_children():
-        # parent = emo_word.parent
-        # grandparent = emo_word.parent.parent
-        # if (parent.text in MAKE and parent.pos == 'V'):
-        #     # Apply Rule 4
-        #     # Example: "Bob Marley vs James Brown mashup will make anyone feel good"
-        #     deps = sort_dependencies(parent, 4)
-        # elif grandparent != 0 and grandparent != -1:
-        #     if (emo_word.parent.parent.text in MAKE and emo_word.parent.parent.pos == 'V'):
-        #         # Apply Rule 4
-        #         # Example: "Bob Marley vs James Brown mashup will make anyone feel good"
-        #         if grandparent.parent in TENSE:
-        #             deps = sort_dependencies(grandparent.parent, 4)
-        #         else:
-        #             deps = sort_dependencies(grandparent, 4)
-
-        # Apply Rule 5
+        # Apply Rule 4
         # Example: "I'm so excited for the new episode of Hannibal tomorrow"
-        deps = sort_dependencies(emo_word, 5)
+        deps = sort_dependencies(emo_word, 4)
     else:
         return emo_word, None
 
@@ -175,10 +156,8 @@ def apply_rules(emo_word):
     else:
         return emo_word, None
 
-def sort_dependencies(word, rule):
-    noun_verb = ['^', 'O', 'D', 'V', '$', 'N']
-    prep_conj = ['P', 'R', 'T']
 
+def sort_dependencies(word, rule):
     deps = sorted(get_dependencies(word, {}).items())
     LHS_pre = [d for (i, d) in deps if i < word.idx]
     RHS_pre = [d for (i, d) in deps if i > word.idx]
@@ -186,13 +165,9 @@ def sort_dependencies(word, rule):
     LHS = strip_prepositions(LHS_pre) if LHS_pre else None
     RHS = strip_prepositions(RHS_pre) if RHS_pre else None
 
-    if rule == 1 or rule == 3 or rule == 5:
-        # if RHS:
-        #     print(word, RHS[0].pos, [(w.text, w.pos) for w in RHS],[(w.text, w.pos) for w in RHS_pre])
+    if rule == 1 or rule == 3 or rule == 4:
         return RHS
-    elif rule == 2 or rule == 4:
-        # if LHS:
-        #     print(word, LHS[0].pos, [(w.text, w.pos) for w in LHS], [(w.text, w.pos) for w in LHS_pre])
+    elif rule == 2:
         return LHS
     else:
         return 'invalid rule'
@@ -209,8 +184,6 @@ def strip_prepositions(phrase):
             return phrase
     else:
         return None
-
-
 
 
 def main():
