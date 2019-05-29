@@ -5,7 +5,7 @@ Process GLoVe .txt files and create pickle files for embedding dictionaries
 import sys
 import pickle
 
-GLOVE_SIZE = 25
+GLOVE_SIZE = 200
 
 
 class GloveVectors:
@@ -26,7 +26,6 @@ class GloveVectors:
 
     def save_embeddings(self):
         self.make_embeddings()
-        # print(self.glove_embeddings)
         filename = "glove" + str(GLOVE_SIZE) + ".pkl"
         pickle.dump(self.glove_embeddings, open(self.lib_path + filename, 'wb'))
 

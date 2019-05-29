@@ -32,10 +32,14 @@ glove_embeddings = pickle.load(open(glove_file, 'rb'))
 
 # Tau threshold for cosine similarity scores between seed matches and candidate seeds
 TAU = 0.85
-CYCLES = 5
+CYCLES = 10
 
 
 class Word:
+    """
+    Word Class captures information about words, including POS, dependencies,
+    and emotion and seed status
+    """
 
     def __init__(self, word_feats, tweet):
         self.idx = int(word_feats[0])
@@ -49,7 +53,7 @@ class Word:
 
         self.tweet_idx = tweet
         self.children = []
-        self.emo = False
+        self.emo = False    # Is an emotion word
         self.seed = None
 
     def add_child(self, child):
@@ -259,7 +263,11 @@ def sort_dependencies(word, rule):
 
 
 def strip_prepositions(phrase):
-    # Strip prepositions, conjunctions from dependent phrase
+    """
+    Strip leading prepositions, conjunctions from dependent phrase
+    :param phrase: cause candidate, String format
+    :return: String
+    """
     PREP_CONJ = ['P', 'R', 'T']
 
     if phrase:
@@ -319,7 +327,6 @@ class Seed:
         between = self.tweet.words[reln1.idx:reln2[0].idx-1]
         if between:
             self.btwn = self.calc_glove_score(between)
-            # print(between, self.btwn)
         else:
             self.btwn = np.ones(GLOVE_SIZE)
 
@@ -400,30 +407,22 @@ def cosine_sim(seed_match, candidate_seed, alpha=1/3, beta=1/3, gamma=1/3):
     before_sim = alpha * (1 - spatial.distance.cosine(seed_match.bef, candidate_seed.bef))
     between_sim = beta * (1 - spatial.distance.cosine(seed_match.btwn, candidate_seed.btwn))
     after_sim = gamma * (1 - spatial.distance.cosine(seed_match.aft, candidate_seed.aft))
-    # print(seed_match.tweet, list(seed_match.bef), candidate_seed.tweet, list(candidate_seed.bef))
     sim = before_sim + between_sim + after_sim
-    # print(before_sim, between_sim, after_sim, sim)
     return sim
 
 
-def find_new_relations(emo_list, seed_matches, tweet_objects, tau, cycle):
+def find_new_relations(candidate_seeds, seed_matches, tau, cycle):
 
     new_seeds = []
 
-    for idx, ex in enumerate(emo_list[2000:2100]):
-        emo = ex[0]
-        if emo.seed:
+    for candidate_seed in candidate_seeds:
+        if candidate_seed.emo.seed: # If this seed is already a match, skip it
             continue
-        else: # todo: separate this out; run this part only on first cycle
-            cause = ex[1]
-            cause_rawtext = " ".join([w.text for w in cause])
-            candidate_seed = Seed(emo, cause, cause_rawtext, tweet_objects[emo.tweet_idx])
-            get_seed_contexts(candidate_seed, emo, cause)
-            emo.seed = False # initially set to False
+        else:
+            max_cosine = 0
 
             for seed in seed_matches:
-                max_cosine = 0
-                cos_sim = cosine_sim(seed, candidate_seed, 0.2, 0.6, 0.2)
+                cos_sim = cosine_sim(seed, candidate_seed, 0.2, 0.6, 0.2)  # todo: make a hyperparameter
 
                 if cos_sim > tau:
                     max_cosine = cos_sim if cos_sim > max_cosine else max_cosine
@@ -437,14 +436,39 @@ def find_new_relations(emo_list, seed_matches, tweet_objects, tau, cycle):
     seed_matches.extend(new_seeds)
 
 
+def set_all_contexts(emo_list, tweet_objects):
+    """
+    Initialize all seed contexts - before, between and after
+    :param emo_list: list of Word objects set True for emotion
+    :param tweet_objects: Tweet objects
+    :return: list of candidate Seed objects
+    """
+    candidate_seeds = []
+    for idx, ex in enumerate(emo_list):
+        emo = ex[0]
+        if emo.seed:
+            continue
+        else:
+            cause = ex[1]
+            cause_rawtext = " ".join([w.text for w in cause])
+            candidate_seed = Seed(emo, cause, cause_rawtext, tweet_objects[emo.tweet_idx])
+            get_seed_contexts(candidate_seed, emo, cause)
+            emo.seed = False # initially set to False
+            candidate_seeds.append(candidate_seed)
+
+    return candidate_seeds
+
+
 def run_bootstrapping(emo_list, seed_matches, tweet_objects):
 
     tau = TAU
+    candidates = set_all_contexts(emo_list, tweet_objects)
     for i in range(CYCLES):
-        find_new_relations(emo_list, seed_matches, tweet_objects, tau, i+1)
+        find_new_relations(candidates, seed_matches, tau, i+1)
         tau = tau + 0 # Perhaps increase tau threshold for each cycle
 
     return seed_matches
+
 
 def emo_cause_outputs(seed_matches, output):
 
@@ -469,6 +493,7 @@ def main():
     emo_list, seed_matches = get_seed_matches(emo_words, idx2tweets, tweet_objects)
     seed_matches = run_bootstrapping(emo_list, seed_matches, tweet_objects)
     emo_cause_outputs(seed_matches, output)
+
 
 if __name__ == "__main__":
     main()
