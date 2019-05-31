@@ -4,7 +4,8 @@ Load dependency parsed tweets
 import sys
 import pickle
 from collections import defaultdict as dd
-from src.baseline.dependency_node import DependencyNode as Word
+from src.word_node import WordNode as Word
+from src.tweet import Tweet
 
 class TweetLoader:
 
@@ -15,6 +16,7 @@ class TweetLoader:
 
     idx2tweet = {}
     tweet2emo = dd(list)
+    tweet_list = []
 
     def __init__(self, file_name):
         """
@@ -30,7 +32,7 @@ class TweetLoader:
         :return:
         """
         for tweet_idx, tweet in enumerate(self.tweets):
-            full_tweet = []
+            tweet_tokens = []
             idx2word, child2parent = {}, {}
             for word in tweet.rstrip().split('\n'):
                 if not word:
@@ -43,12 +45,34 @@ class TweetLoader:
                 # Isolate emotion words that are Verbs or Adjectives
                 if curr_word.text in self.emo_kws and curr_word.pos in self.POS_LIST:
                     self.tweet2emo[tweet_idx].append(curr_word)
+                    curr_word.emo = True
 
-                full_tweet.append(curr_word.text)
+                tweet_tokens.append(curr_word.text)
 
             # update tweet dictionary and add children to words
             self.add_relatives(child2parent, idx2word)
-            self.idx2tweet[tweet_idx] = " ".join(full_tweet)
+            tweet_text = " ".join(tweet_tokens)
+            self.idx2tweet[tweet_idx] = tweet_text
+
+            # Create Tweet object
+            self.add_tweet(tweet_idx, tweet_text, tweet_tokens, idx2word.values())
+
+    def add_tweet(self, tweet_idx, tweet_text, tweet_tokens, words):
+        """
+        Create Tweet object
+        :param tweet_idx: index of tweet
+        :param tweet_text: raw text of Tweet
+        :param tweet_tokens: tokenized list of words in Tweet
+        :param words: list of Word objects
+        :return:
+        """
+        this_tweet = Tweet(tweet_text)
+        this_tweet.idx = tweet_idx
+        this_tweet.tokens = tweet_tokens
+        this_tweet.index = tweet_idx
+        this_tweet.words = words
+        this_tweet.emo_words = self.tweet2emo[tweet_idx]
+        self.tweet_list.append(this_tweet)
 
     def add_relatives(self, child2parent, idx2word):
         """

@@ -15,6 +15,7 @@ class EmotionCauseRuleExtractor:
 
     MODALS = ('may', 'might', 'could', 'should', 'would', 'will')
     PREP_CONJ = ('P', 'R', 'T')
+    VERBS = ('V', 'L')
 
     def get_dependencies(self, word_list, deps):
         """
@@ -41,7 +42,7 @@ class EmotionCauseRuleExtractor:
         :return: the emotion and cause
         """
         cause = None
-        if emo_word.pos == 'V' and emo_word.has_children():
+        if emo_word.pos in self.VERBS and emo_word.has_children():
             if emo_word.parent == 0:
                 # Apply Rule 1
                 # Example: "I love Bernie Sanders"
@@ -54,10 +55,15 @@ class EmotionCauseRuleExtractor:
                 # Apply Rule 3
                 # Example: "exhausted from putting groceries away"
                 cause = self.get_emotion_cause(emo_word, 3)
-        elif emo_word.pos == 'A' and emo_word.has_children():
-            # Apply Rule 4
-            # Example: "I'm so excited for the new episode of Hannibal tomorrow"
-            cause = self.get_emotion_cause(emo_word, 4)
+        elif emo_word.pos == 'A':
+            if emo_word.has_children():
+                # Apply Rule 4
+                # Example: "I'm so excited for the new episode of Hannibal tomorrow"
+                cause = self.get_emotion_cause(emo_word, 4)
+            elif emo_word.parent != 0 and emo_word.parent.pos in self.VERBS:
+                # Apply Rule 5
+                # Example: "You may be interested in this evening's BBC documentary"
+                cause = self.get_emotion_cause(emo_word.parent, 5)
 
         if cause:
             return emo_word, " ".join([d.text for d in cause])
@@ -76,13 +82,12 @@ class EmotionCauseRuleExtractor:
         lhs = [d for d in deps if d.idx < word.idx]
         rhs = [d for d in deps if d.idx > word.idx]
 
-        lhs = self.strip_prepositions(lhs) if lhs else None
-        rhs = self.strip_prepositions(rhs) if rhs else None
-
         if rule == 2:
-            return lhs
+            return self.strip_prepositions(lhs) if lhs else None
+        elif rule == 5:
+            return self.strip_prepositions(rhs[1:]) if len(rhs) > 2 else None
         else:
-            return rhs
+            return self.strip_prepositions(rhs) if rhs else None
 
 
     def strip_prepositions(self, phrase):

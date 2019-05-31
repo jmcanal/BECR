@@ -1,8 +1,11 @@
 """
 A node of the dependency parse
 """
-import sys
-class DependencyNode:
+class WordNode:
+    """
+    Word Class captures information about words, including POS, dependencies,
+    and emotion and seed status
+    """
 
     POS_LIST = ('MW', 'CONJ')
 
@@ -19,6 +22,8 @@ class DependencyNode:
         self.mw = word_feats[7] if word_feats[7] in self.POS_LIST else None
         self.tweet_idx = tweet
         self.children = []
+        self.emo = False    # Is an emotion word
+        self.seed = None
 
     def add_child(self, child):
         """
@@ -48,7 +53,16 @@ class DependencyNode:
         :return: str
         """
         return ", ".join([w.text for w in self.children])
-    
+
+    def has_seed(self):
+        """
+        True means the Word object has been added to Seed relations
+        False means that Word was checked but did not pass threshold
+        None means that the word has not been checked for Seed relation
+        :return:
+        """
+        return self.seed
+
     def __lt__(self, other):
         """
         Words are ordered by their alphanumeric order
