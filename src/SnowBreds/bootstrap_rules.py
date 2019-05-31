@@ -6,7 +6,9 @@ which is itself an extension of Snowball
 Uses baseline rule-based emo-cause extractor as starting point,
 also with outputs from the TweeboParser Dependency Parser
 """
+import os
 import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 import numpy as np
 from scipy import spatial
 np.set_printoptions(threshold=sys.maxsize)
@@ -19,7 +21,7 @@ from src.baseline.dependency_tweet_loader import TweetLoader
 class RuleBootstrapper:
 
     # Loading pre-identified emo-cause seed pairs in dictionary format
-    seed_pairs = pickle.load(open('../lib/seeds/train_seeds.pkl', "rb"))
+    seed_pairs = pickle.load(open('../../lib/seeds/train_seeds.pkl', "rb"))
 
     def __init__(self, tau=0.85, cycles=10):
         """
@@ -40,11 +42,11 @@ class RuleBootstrapper:
         """
         seed_matches = []
         for ex in emo_list:
-            emo, cause = ex
+            emo, cause, sentence = ex
             cause_rawtext = " ".join([w.text for w in cause])
             if emo.text in self.seed_pairs.keys():
                 if cause_rawtext in self.seed_pairs[emo.text]:
-                    new_seed = Seed(emo, cause, cause_rawtext, tweet_objects[emo.tweet_idx])
+                    new_seed = Seed(emo, cause, tweet_objects[emo.tweet_idx])
                     seed_matches.append(new_seed)
                     self.get_seed_contexts(new_seed, emo, cause)
                     emo.seed = True # emo-word is added to seed matches
@@ -132,8 +134,7 @@ class RuleBootstrapper:
                 continue
             else:
                 cause = ex[1]
-                cause_rawtext = " ".join([w.text for w in cause])
-                candidate_seed = Seed(emo, cause, cause_rawtext, tweet_objects[emo.tweet_idx])
+                candidate_seed = Seed(emo, cause, tweet_objects[emo.tweet_idx])
                 self.get_seed_contexts(candidate_seed, emo, cause)
                 emo.seed = False # initially set to False
                 candidate_seeds.append(candidate_seed)
@@ -163,10 +164,11 @@ class RuleBootstrapper:
         """
         with open(output, 'w') as out:
             for seed in seed_matches:
-                out.write(seed.tweet.raw + "\n")
-                out.write("EMO: " + seed.emo.text + " CAUSE: " + seed.cause_raw + "\n")
-                out.write(str(seed.cosine) + " cycle: " + str(seed.cycle) + "\n")
-                out.write("\n")
+                print(seed.tweet.raw, file=out)
+                cause_text = " ".join([d.text for d in seed.cause])
+                print("EMO: " + seed.emo.text + " CAUSE: " + cause_text, file=out)
+                print(str(seed.cosine) + " cycle: " + str(seed.cycle), file=out)
+                print("", file=out)
 
 
 def main():

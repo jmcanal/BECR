@@ -66,7 +66,7 @@ class EmotionCauseRuleExtractor:
                 cause = self.get_emotion_cause(emo_word.parent, 5)
 
         if cause:
-            return emo_word, " ".join([d.text for d in cause])
+            return emo_word, cause
         else:
             return emo_word, None
 
@@ -114,8 +114,8 @@ class EmotionCauseRuleExtractor:
             for word in words:
                 emo, cause = self.apply_rules(word)
                 if cause:
-                    sys.stderr.write("EMOTION: " + emo.text + ", CAUSE: " + cause)
-                    emo_list.append((emo.text, cause, idx2tweets[tweet_id]))
+                    sys.stderr.write("EMOTION: " + emo.text + ", CAUSE: " + " ".join([d.text for d in cause]))
+                    emo_list.append((emo, cause, idx2tweets[tweet_id]))
                 elif emo:
                     sys.stderr.write("EMOTION: " + emo.text + ", NO CAUSE FOUND")
                     continue
@@ -140,7 +140,8 @@ def main():
 
     with open(output, 'w') as out:
         for emotion, cause, sentence in emo_list:
-            print("EMOTION: " + emotion + " CAUSE: " + cause + " SENTENCE: " + sentence, file=out)
+            cause = " ".join([d.text for d in cause])
+            print("EMOTION: " + emotion.text + " CAUSE: " + cause + " SENTENCE: " + sentence, file=out)
 
 
 if __name__ == "__main__":

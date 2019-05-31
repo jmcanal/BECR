@@ -10,13 +10,12 @@ class Seed:
 
     # Loading glove vectors
     GLOVE_SIZE = 25
-    glove_file = '../lib/glove/glove' + str(GLOVE_SIZE) + '.pkl'
+    glove_file = '../../lib/glove/glove' + str(GLOVE_SIZE) + '.pkl'
     glove_embeddings = pickle.load(open(glove_file, 'rb'))
 
-    def __init__(self, emo, cause, cause_raw, tweet):
+    def __init__(self, emo, cause, tweet):
         self.emo = emo
         self.cause = cause
-        self.cause_raw = cause_raw
         self.tweet = tweet
         self.bef = []
         self.btwn = []
@@ -46,7 +45,6 @@ class Seed:
         between = self.tweet.words[reln1[-1].idx:reln2[0].idx-1]
         if between:
             self.btwn = self.calc_glove_score(between)
-            # print(between, self.btwn)
         else:
             self.btwn = np.ones(self.GLOVE_SIZE)
 

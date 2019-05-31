@@ -55,7 +55,7 @@ class TweetLoader:
             self.idx2tweet[tweet_idx] = tweet_text
 
             # Create Tweet object
-            self.add_tweet(tweet_idx, tweet_text, tweet_tokens, idx2word.values())
+            self.add_tweet(tweet_idx, tweet_text, tweet_tokens, list(idx2word.values()))
 
     def add_tweet(self, tweet_idx, tweet_text, tweet_tokens, words):
         """
