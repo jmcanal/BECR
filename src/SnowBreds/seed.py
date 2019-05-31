@@ -1,5 +1,5 @@
 """
-
+Seed object to represent seed examples for bootstrapping
 """
 import sys
 import numpy as np
@@ -14,6 +14,12 @@ class Seed:
     glove_embeddings = pickle.load(open(glove_file, 'rb'))
 
     def __init__(self, emo, cause, tweet):
+        """
+        Initialize by setting the emotion and cause values
+        :param emo:
+        :param cause:
+        :param tweet:
+        """
         self.emo = emo
         self.cause = cause
         self.tweet = tweet
@@ -24,8 +30,11 @@ class Seed:
         self.cycle = None
 
     def calc_glove_score(self, context):
-        # Calculate context score with GLoVe embedding
-        # Will be a vector
+        """
+        Calculate context score with GLoVe embedding
+        :param context: list of Word objects
+        :return: vector
+        """
         context_embedding = np.ones(self.GLOVE_SIZE)
         for word in context:    # todo: fix the tokenization; glove has: 's, 'm; twokenizer has i'm, it's
             if word in self.glove_embeddings.keys():
@@ -35,6 +44,11 @@ class Seed:
         return context_embedding
 
     def get_context_before(self, reln1):
+        """
+        Get the context before the given relation
+        :param reln1: the given relation
+        :return: void
+        """
         before = self.tweet.words[0:reln1[0].idx-1]
         if before:
             self.bef = self.calc_glove_score(before)
@@ -42,6 +56,12 @@ class Seed:
             self.bef = np.ones(self.GLOVE_SIZE)
 
     def get_context_btwn(self, reln1, reln2):
+        """
+        Get the context between the two relations
+        :param reln1: the first relation
+        :param reln2: the second relation
+        :return: void
+        """
         between = self.tweet.words[reln1[-1].idx:reln2[0].idx-1]
         if between:
             self.btwn = self.calc_glove_score(between)
@@ -49,6 +69,11 @@ class Seed:
             self.btwn = np.ones(self.GLOVE_SIZE)
 
     def get_context_after(self, reln2):
+        """
+        Get the context after the given relation
+        :param reln2: the given relation
+        :return: void
+        """
         after = self.tweet.words[reln2[-1].idx:-1]
         if after:
             self.aft = self.calc_glove_score(after)

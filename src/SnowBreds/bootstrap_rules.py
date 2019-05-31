@@ -16,6 +16,7 @@ import pickle
 from src.SnowBreds.seed import Seed
 from src.baseline.dependency_rule_extractor import EmotionCauseRuleExtractor
 from src.baseline.dependency_tweet_loader import TweetLoader
+import argparse
 
 
 class RuleBootstrapper:
@@ -23,15 +24,18 @@ class RuleBootstrapper:
     # Loading pre-identified emo-cause seed pairs in dictionary format
     seed_pairs = pickle.load(open('../../lib/seeds/train_seeds.pkl', "rb"))
 
-    def __init__(self, tau=0.85, cycles=10):
+    def __init__(self, args):
         """
         Initialize by setting tau and cycle thresholds for cosine similarity scores between seed matches and
         candidate seeds
         :param tau: tau threshold value
         :param cycles: cycle value
         """
-        self.tau = tau
-        self.cycles = cycles
+        self.tau = args.tau
+        self.cycles = args.cycles
+        self.alpha = args.alpha
+        self.beta = args.beta
+        self.gamma = args.gamma
 
     def get_seed_matches(self, emo_list, tweet_objects):
         """
@@ -74,19 +78,16 @@ class RuleBootstrapper:
         seed.get_context_btwn(reln1, reln2)
         seed.get_context_after(reln2)
 
-    def cosine_sim(self, seed_match, candidate_seed, alpha=1/3, beta=1/3, gamma=1/3):
+    def cosine_sim(self, seed_match, candidate_seed):
         """
         Calculate cosine similarity for potential seed object with established seed object
         :param seed_match: Seed object, Previously verified seed example
         :param candidate_seed: Seed object; Potential seed match
-        :param alpha: optional weight parameter for before context
-        :param beta: optional weight parameter for between context
-        :param gamma: optional weight parameter for after context
         :return: float sim - cosine similarity score
         """
-        before_sim = alpha * (1 - spatial.distance.cosine(seed_match.bef, candidate_seed.bef))
-        between_sim = beta * (1 - spatial.distance.cosine(seed_match.btwn, candidate_seed.btwn))
-        after_sim = gamma * (1 - spatial.distance.cosine(seed_match.aft, candidate_seed.aft))
+        before_sim = self.alpha * (1 - spatial.distance.cosine(seed_match.bef, candidate_seed.bef))
+        between_sim = self.beta * (1 - spatial.distance.cosine(seed_match.btwn, candidate_seed.btwn))
+        after_sim = self.gamma * (1 - spatial.distance.cosine(seed_match.aft, candidate_seed.aft))
         sim = before_sim + between_sim + after_sim
         return sim
 
@@ -107,7 +108,7 @@ class RuleBootstrapper:
                 max_cosine = 0
 
                 for seed in seed_matches:
-                    cos_sim = self.cosine_sim(seed, candidate_seed, 0.2, 0.6, 0.2)  # todo: make a hyperparameter
+                    cos_sim = self.cosine_sim(seed, candidate_seed)
 
                     if cos_sim > tau:
                         max_cosine = cos_sim if cos_sim > max_cosine else max_cosine
@@ -170,6 +171,16 @@ class RuleBootstrapper:
                 print(str(seed.cosine) + " cycle: " + str(seed.cycle), file=out)
                 print("", file=out)
 
+def parse_args(args):
+    parser = argparse.ArgumentParser()
+    parser.add_argument('parsed_tweet_file')
+    parser.add_argument('output_file')
+    parser.add_argument('--tau', type=float, default=0.85)
+    parser.add_argument('--cycles', type=float, default=10)
+    parser.add_argument('--alpha', type=float, default=0.2)
+    parser.add_argument('--beta', type=float, default=0.6)
+    parser.add_argument('--gamma', type=float, default=0.2)
+    return parser.parse_args(args)
 
 def main():
     """
@@ -177,18 +188,17 @@ def main():
     emotion-cause relations that are found
     :return: void
     """
-    parsed_tweet_file = sys.argv[1]
-    output = sys.argv[2]
+    args = parse_args(sys.argv[1:])
 
-    tweets = TweetLoader(parsed_tweet_file)
+    tweets = TweetLoader(args.parsed_tweet_file)
     tweets.extract_emo_relations()
     extractor = EmotionCauseRuleExtractor()
     emo_list = extractor.build_emo_cause_list(tweets.tweet2emo, tweets.idx2tweet)
 
-    bootstrapper = RuleBootstrapper()
+    bootstrapper = RuleBootstrapper(args)
     seed_matches = bootstrapper.get_seed_matches(emo_list, tweets.tweet_list)
     seed_matches = bootstrapper.run_bootstrapping(emo_list, seed_matches, tweets.tweet_list)
-    bootstrapper.print_emo_causes(seed_matches, output)
+    bootstrapper.print_emo_causes(seed_matches, args.output_file)
 
 
 if __name__ == "__main__":
