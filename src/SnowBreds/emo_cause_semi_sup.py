@@ -30,6 +30,9 @@ GLOVE_SIZE = 25
 glove_file = '../lib/glove/glove' + str(GLOVE_SIZE) + '.pkl'
 glove_embeddings = pickle.load(open(glove_file, 'rb'))
 
+# Loading pre-identified emo-cause seed pairs; it is in dictionary format
+seed_pairs = pickle.load(open('../lib/seeds/train_seeds.pkl', "rb"))
+
 # Tau threshold for cosine similarity scores between seed matches and candidate seeds
 TAU = 0.85
 CYCLES = 5
@@ -309,14 +312,14 @@ class Seed:
         return context_embedding
 
     def get_context_before(self, reln1):
-        before = self.tweet.words[0:reln1.idx-1]
+        before = self.tweet.words[0:reln1[0].idx-1]
         if before:
             self.bef = self.calc_glove_score(before)
         else:
             self.bef = np.ones(GLOVE_SIZE)
 
     def get_context_btwn(self, reln1, reln2):
-        between = self.tweet.words[reln1.idx:reln2[0].idx-1]
+        between = self.tweet.words[reln1[-1].idx:reln2[0].idx-1]
         if between:
             self.btwn = self.calc_glove_score(between)
             # print(between, self.btwn)
@@ -347,11 +350,11 @@ def get_seed_matches(emo_words, idx2tweets, tweet_objects):
     #               'worry': ['the future'],
     #               'afraid': ['tomorrow']}
 
-    seed_pairs = {'love': ['life', 'this time of year', 'christmas time'],
-                  'hate': ['school'],
-                  'excited': ['tomorrow', 'see messi tomorrow'],
-                  'tired': ['waiting'],
-                  'worry': ['the future']}
+    # seed_pairs = {'love': ['life', 'this time of year', 'christmas time'],
+    #               'hate': ['school'],
+    #               'excited': ['tomorrow', 'see messi tomorrow'],
+    #               'tired': ['waiting'],
+    #               'worry': ['the future']}
 
     emo_list = preprocess_emo_cause(emo_words)
 
@@ -382,9 +385,16 @@ def get_seed_contexts(seed, emo, cause):
     :param cause: list of Word objects
     :return:
     """
-    seed.get_context_before(emo)
-    seed.get_context_btwn(emo, cause)
-    seed.get_context_after(cause)
+    if emo.idx < cause[0].idx:
+        reln1 = [emo]   # TODO: fix this when switching to multi-word emo
+        reln2 = cause
+    else:
+        reln1 = cause
+        reln2 = [emo]
+
+    seed.get_context_before(reln1)
+    seed.get_context_btwn(reln1, reln2)
+    seed.get_context_after(reln2)
 
 
 def cosine_sim(seed_match, candidate_seed, alpha=1/3, beta=1/3, gamma=1/3):
