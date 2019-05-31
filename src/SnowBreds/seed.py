@@ -8,12 +8,7 @@ import pickle
 
 class Seed:
 
-    # Loading glove vectors
-    GLOVE_SIZE = 25
-    glove_file = '../../lib/glove/glove' + str(GLOVE_SIZE) + '.pkl'
-    glove_embeddings = pickle.load(open(glove_file, 'rb'))
-
-    def __init__(self, emo, cause, tweet):
+    def __init__(self, emo, cause, tweet, glove_size):
         """
         Initialize by setting the emotion and cause values
         :param emo:
@@ -28,6 +23,9 @@ class Seed:
         self.aft = []
         self.cosine = None
         self.cycle = None
+        self.glove_size = glove_size
+        glove_file = '../../lib/glove/glove' + str(glove_size) + '.pkl'
+        self.glove_embeddings = pickle.load(open(glove_file, 'rb'))
 
     def calc_glove_score(self, context):
         """
@@ -35,7 +33,7 @@ class Seed:
         :param context: list of Word objects
         :return: vector
         """
-        context_embedding = np.ones(self.GLOVE_SIZE)
+        context_embedding = np.ones(self.glove_size)
         for word in context:    # todo: fix the tokenization; glove has: 's, 'm; twokenizer has i'm, it's
             if word in self.glove_embeddings.keys():
                 word_vec = np.array(self.glove_embeddings[word])
@@ -53,7 +51,7 @@ class Seed:
         if before:
             self.bef = self.calc_glove_score(before)
         else:
-            self.bef = np.ones(self.GLOVE_SIZE)
+            self.bef = np.ones(self.glove_size)
 
     def get_context_btwn(self, reln1, reln2):
         """
@@ -66,7 +64,7 @@ class Seed:
         if between:
             self.btwn = self.calc_glove_score(between)
         else:
-            self.btwn = np.ones(self.GLOVE_SIZE)
+            self.btwn = np.ones(self.glove_size)
 
     def get_context_after(self, reln2):
         """
@@ -78,4 +76,4 @@ class Seed:
         if after:
             self.aft = self.calc_glove_score(after)
         else:
-            self.aft = np.ones(self.GLOVE_SIZE)
+            self.aft = np.ones(self.glove_size)

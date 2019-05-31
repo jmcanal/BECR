@@ -36,6 +36,7 @@ class RuleBootstrapper:
         self.alpha = args.alpha
         self.beta = args.beta
         self.gamma = args.gamma
+        self.glove_size = args.glove_size
 
     def get_seed_matches(self, emo_list, tweet_objects):
         """
@@ -50,7 +51,7 @@ class RuleBootstrapper:
             cause_rawtext = " ".join([w.text for w in cause])
             if emo.text in self.seed_pairs.keys():
                 if cause_rawtext in self.seed_pairs[emo.text]:
-                    new_seed = Seed(emo, cause, tweet_objects[emo.tweet_idx])
+                    new_seed = Seed(emo, cause, tweet_objects[emo.tweet_idx], self.glove_size)
                     seed_matches.append(new_seed)
                     self.get_seed_contexts(new_seed, emo, cause)
                     emo.seed = True # emo-word is added to seed matches
@@ -135,7 +136,7 @@ class RuleBootstrapper:
                 continue
             else:
                 cause = ex[1]
-                candidate_seed = Seed(emo, cause, tweet_objects[emo.tweet_idx])
+                candidate_seed = Seed(emo, cause, tweet_objects[emo.tweet_idx], self.glove_size)
                 self.get_seed_contexts(candidate_seed, emo, cause)
                 emo.seed = False # initially set to False
                 candidate_seeds.append(candidate_seed)
@@ -175,6 +176,7 @@ def parse_args(args):
     parser = argparse.ArgumentParser()
     parser.add_argument('parsed_tweet_file')
     parser.add_argument('output_file')
+    parser.add_argument('--glove_size', choices=[25, 50, 100], default=25)
     parser.add_argument('--tau', type=float, default=0.85)
     parser.add_argument('--cycles', type=float, default=10)
     parser.add_argument('--alpha', type=float, default=0.2)
