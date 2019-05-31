@@ -1,69 +1,21 @@
 """
 Baseline rule-based system for emotion cause extraction of tweets
 """
-
+import os
 import sys
-from nltk import pos_tag
+sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 import numpy as np
 np.set_printoptions(threshold=sys.maxsize)
 import pickle
-
-
-# For loading NRC emotion lexicon
-emo_matrix = np.load('../lib/emotion_lexicon/NRC/nrc_emotion_lexicon_matrix.npy')
-w2idx = pickle.load(open('../lib/emotion_lexicon/NRC/nrc_word_map.pkl', "rb"))
-emo2idx = pickle.load(open('../lib/emotion_lexicon/NRC/nrc_emotion_map.pkl', "rb"))
-idx2emo = {v: k for k, v in emo2idx.items()}
-
-# For loading curated emotion keyword list
-emo_kws = pickle.load(open('../lib/emotion_lexicon/emotion_kw_list/emotion_keywords.pkl', "rb"))
-
-
-class TweetPatterns:
-    """
-    Processes OpenIE outputs
-    - Converts triples to format that can be matched to predefined emotion-cause patterns
-    - Includes preprocessing steps of adding POS tags and emotion values
-    """
-
-    patterns = []
-    tweets = []
-
-    def __init__(self, relation_file):
-        """
-        Initialize the class by splitting the OpenIE file into tweet descriptor sections
-        :param relation_file: the OpenIE output file with relations extracted from tweets
-        """
-        with open(relation_file, 'r') as f:
-            self.tweet_relations = f.read().split('\n\n')
-        self.get_patterns()
-
-    def get_patterns(self):
-        """
-        Filter the output relations to find patterns we want to include
-        :return: the list of patterns and the raw tweets
-        """
-        for idx, tweet in enumerate(self.tweet_relations):
-
-            tweet_info = tweet.split('\n')
-            self.tweets.append(tweet_info[0])
-
-            for relation in tweet_info[1:]:
-                triple = relation.split(" ", 1)[1].strip('()\n')
-
-                # context is not a relation that we care about
-                if triple.startswith('Context'):
-                    continue
-
-                triple = [w for w in triple.split('; ') if w]
-                if len(triple) > 2:
-                    self.patterns.append((idx, pos_tag(triple)))
-
+from src.baseline.openie_tweet_loader import TweetLoader
 
 class EmotionCauseRuleExtractor:
     """
     Apply rules to extract emotion causes from tweets
     """
+
+    # For loading curated emotion keyword list
+    emo_kws = pickle.load(open('../../lib/emotion_lexicon/emotion_kw_list/emotion_keywords.pkl', "rb"))
 
     FIRST_PERSON = ('I', 'i')
     NOMINALS = ('JJ', 'NN', 'PRP')
@@ -72,7 +24,6 @@ class EmotionCauseRuleExtractor:
     MODALS = ('may', 'might', 'could', 'should', 'would', 'will')
     OPENIE_MARKUP = ('L:', 'T:')
     PREP_CONJ = ('in', 'about', 'for', 'because', 'from', 'at', 'to')
-    # TODO: negated modals
 
     def __init__(self, tweets):
         """
@@ -250,14 +201,7 @@ class EmotionCauseRuleExtractor:
         """
         words = phrase.split()
         for i, word in enumerate(words):
-
-            # Below is code for NRC emo list
-            # if word in w2idx.keys():
-            #     idx = w2idx[word]
-            #     if np.sum(emo_matrix[idx]) > 0:
-            #         return word, words, i
-
-            if word in emo_kws:
+            if word in self.emo_kws:
                 return word, words, i
         return False, words, -1
 
@@ -272,9 +216,9 @@ def main():
     output = sys.argv[2]
     tweet_emo_cause = []
 
-    tp = TweetPatterns(tweet_relation_file)
-    rules = EmotionCauseRuleExtractor(tp.tweets)
-    for p in tp.patterns:
+    loader = TweetLoader(tweet_relation_file)
+    rules = EmotionCauseRuleExtractor(loader.tweets)
+    for p in loader.patterns:
         emotion_cause = rules.apply_rules(p)
         if emotion_cause:
             tweet_emo_cause.append(emotion_cause)
