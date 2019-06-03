@@ -6,8 +6,8 @@ import numpy as np
 import pickle
 from scipy import spatial
 
-WORD1 = ["interested"]
-WORD2 = ["surprised"]
+WORD1 = ["saufiheiuwfhajebf"]
+WORD2 = ["don't"]
 
 GLOVE_SIZE = 25
 glove_file = '../../lib/glove/glove' + str(GLOVE_SIZE) + '.pkl'
@@ -29,12 +29,12 @@ def get_sim_scores(score1, score2):
 
 def main():
 
-    # Test values returned for zero-based vs. one-based arrays
+    # Test values returned for zero-based vs. small number-based arrays
     context1_embedding_zeros = np.zeros(GLOVE_SIZE)
-    context1_embedding_ones = np.ones(GLOVE_SIZE)
+    context1_embedding_ones = np.full(GLOVE_SIZE, 1.e-28)
 
     context2_embedding_zeros = np.zeros(GLOVE_SIZE)
-    context2_embedding_ones = np.ones(GLOVE_SIZE)
+    context2_embedding_ones = np.full(GLOVE_SIZE, 1.e-28)
 
     score1_zeros = get_context_score(WORD1, context1_embedding_zeros)
     score1_ones = get_context_score(WORD1, context1_embedding_ones)

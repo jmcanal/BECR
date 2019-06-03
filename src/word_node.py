@@ -7,7 +7,7 @@ class WordNode:
     and emotion and seed status
     """
 
-    POS_LIST = ('MW', 'CONJ')
+    MWE_CONJ = ('MW', 'CONJ')
 
     def __init__(self, word_feats, tweet):
         """
@@ -16,14 +16,17 @@ class WordNode:
         :param tweet: the tweet this node is in
         """
         self.idx = int(word_feats[0])
-        self.text = word_feats[1]
+        self.text = word_feats[1].lower()
+        self.original_text = word_feats[1]  # String object of word that preserves capitalization
         self.pos = word_feats[3]
         self.parent = int(word_feats[6])
-        self.mw = word_feats[7] if word_feats[7] in self.POS_LIST else None
+        self.mw = word_feats[7] if word_feats[7] in self.MWE_CONJ else None
         self.tweet_idx = tweet
         self.children = []
         self.emo = False    # Is an emotion word
         self.seed = None
+        self.bad_seed = None
+        self.phrase = []
 
     def add_child(self, child):
         """

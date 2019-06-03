@@ -9,14 +9,13 @@ also with outputs from the TweeboParser Dependency Parser
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-import numpy as np
 from scipy import spatial
-np.set_printoptions(threshold=sys.maxsize)
 import pickle
 from src.SnowBreds.seed import Seed
-from src.baseline.dependency_rule_extractor import EmotionCauseRuleExtractor
-from src.baseline.dependency_tweet_loader import TweetLoader
+from src.SnowBreds.snowbreds_dependency_rule_extractor import SnowBredsEmotionCauseRuleExtractor
+from src.SnowBreds.snowbreds_dependency_tweet_loader import SnowBredsTweetLoader
 import argparse
+import time
 
 
 class RuleBootstrapper:
@@ -32,29 +31,57 @@ class RuleBootstrapper:
         :param cycles: cycle value
         """
         self.tau = args.tau
+        self.neg_tau = args.neg_tau
         self.cycles = args.cycles
         self.alpha = args.alpha
         self.beta = args.beta
         self.gamma = args.gamma
+        self.delta = args.delta
+        self.epsilon = args.epsilon
+        self.neg_alpha = args.neg_alpha
+        self.neg_beta = args.neg_beta
+        self.neg_gamma = args.neg_gamma
+        self.neg_delta = args.neg_delta
+        self.neg_epsilon = args.neg_epsilon
         self.glove_size = args.glove_size
 
     def get_seed_matches(self, emo_list, tweet_objects):
         """
-        set up list of seeds to search for in twitter preprocessed outputs
+        set up list of seeds to search for in twitter preprocessed outputs;
+        Seeds must be exact string matches for emotion and cause pair relations
         :param emo_list: list of emotion cause pairs
         :param tweet_objects: list of Tweet objects from file
         :return: list of Seed objects
         """
+
+        neg_seed_pairs = {'love': ['i', 'hollywood', 'the tory press'],
+                          'hate': ['i', 'reddit', 'kpop fandoms'],
+                          'regret': ['iran'],
+                          'surprise': ['me'],
+                          'hurt': ['you'],
+                          'don\'t worry': ['me and my mans @ jjb1owens'],
+                          'mean':['i']}
+
         seed_matches = []
         for ex in emo_list:
             emo, cause, sentence = ex
             cause_rawtext = " ".join([w.text for w in cause])
-            if emo.text in self.seed_pairs.keys():
-                if cause_rawtext in self.seed_pairs[emo.text]:
+            emo_rawtext = " ".join([w.text for w in emo.phrase])
+            if emo_rawtext in neg_seed_pairs.keys():  # todo: some refactoring here
+                if cause_rawtext in neg_seed_pairs[emo_rawtext]:
+                    emo.bad_seed = True
                     new_seed = Seed(emo, cause, tweet_objects[emo.tweet_idx], self.glove_size)
                     seed_matches.append(new_seed)
                     self.get_seed_contexts(new_seed, emo, cause)
+                    new_seed.cosine = 0  # initial bad seed matches given cosine sim score of 0 by default
+                    new_seed.cycle = 0
+                    new_seed.bad = True
+            if emo_rawtext in self.seed_pairs.keys():
+                if cause_rawtext in self.seed_pairs[emo_rawtext]:
                     emo.seed = True # emo-word is added to seed matches
+                    new_seed = Seed(emo, cause, tweet_objects[emo.tweet_idx], self.glove_size)
+                    seed_matches.append(new_seed)
+                    self.get_seed_contexts(new_seed, emo, cause)
                     new_seed.cosine = 1.0 # initial seed matches given highest cosine sim score by default
                     new_seed.cycle = 0
 
@@ -63,33 +90,44 @@ class RuleBootstrapper:
     def get_seed_contexts(self, seed, emo, cause):
         """
         Assign before, between and after contexts to seed
+        Also get emo and cause embedding scores here
         :param seed: Seed object
         :param emo: Word object
         :param cause: list of Word objects
         :return:
         """
         if emo.idx < cause[0].idx:
-            reln1 = [emo]   # TODO: fix this when switching to multi-word emo
+            reln1 = emo.phrase
             reln2 = cause
         else:
             reln1 = cause
-            reln2 = [emo]
+            reln2 = emo.phrase
 
         seed.get_context_before(reln1)
         seed.get_context_btwn(reln1, reln2)
         seed.get_context_after(reln2)
 
-    def cosine_sim(self, seed_match, candidate_seed):
+        # Get embedddings for emo and cause
+        seed.emo_embedding = seed.calc_glove_score([e.text for e in emo.phrase])
+        seed.cause_embedding = seed.calc_glove_score([c.text for c in cause])
+
+    def cosine_sim(self, seed_match, candidate_seed, alpha, beta, gamma, delta, epsilon):
         """
         Calculate cosine similarity for potential seed object with established seed object
         :param seed_match: Seed object, Previously verified seed example
         :param candidate_seed: Seed object; Potential seed match
         :return: float sim - cosine similarity score
         """
-        before_sim = self.alpha * (1 - spatial.distance.cosine(seed_match.bef, candidate_seed.bef))
-        between_sim = self.beta * (1 - spatial.distance.cosine(seed_match.btwn, candidate_seed.btwn))
-        after_sim = self.gamma * (1 - spatial.distance.cosine(seed_match.aft, candidate_seed.aft))
-        sim = before_sim + between_sim + after_sim
+        # Determine context similarities (spans before, between and after emotion and cause)
+        before_sim = alpha * (1 - spatial.distance.cosine(seed_match.bef, candidate_seed.bef))
+        between_sim = beta * (1 - spatial.distance.cosine(seed_match.btwn, candidate_seed.btwn))
+        after_sim = gamma * (1 - spatial.distance.cosine(seed_match.aft, candidate_seed.aft))
+
+        # Determine Emotion and Cause similarities
+        emo_sim = epsilon * (1 - spatial.distance.cosine(seed_match.emo_embedding, candidate_seed.emo_embedding))
+        cause_sim = delta * (1 - spatial.distance.cosine(seed_match.cause_embedding, candidate_seed.cause_embedding))
+
+        sim = before_sim + between_sim + after_sim + emo_sim + cause_sim
         return sim
 
     def find_new_relations(self, candidate_seeds, seed_matches, tau, cycle):
@@ -103,21 +141,37 @@ class RuleBootstrapper:
         """
         new_seeds = []
         for candidate_seed in candidate_seeds:
-            if candidate_seed.emo.seed: # If this seed is already a match, skip it
+            if candidate_seed.emo.seed or candidate_seed.emo.bad_seed:  # If this seed is already a match or a bad seed, skip it
                 continue
             else:
                 max_cosine = 0
 
                 for seed in seed_matches:
-                    cos_sim = self.cosine_sim(seed, candidate_seed)
+                    if candidate_seed.bad:
+                        continue
+                    else:
+                        if seed.bad:
+                            cos_sim = self.cosine_sim(seed, candidate_seed, self.neg_alpha,
+                                                      self.neg_beta, self.neg_gamma,
+                                                      self.neg_delta, self.neg_epsilon)
+                            if cos_sim > self.neg_tau:
+                                candidate_seed.bad = True
+                        else:
+                            cos_sim = self.cosine_sim(seed, candidate_seed, self.alpha,
+                                                      self.beta, self.gamma,
+                                                      self.delta, self.epsilon)
+                            if cos_sim > tau:
+                                max_cosine = cos_sim if cos_sim > max_cosine else max_cosine
 
-                    if cos_sim > tau:
-                        max_cosine = cos_sim if cos_sim > max_cosine else max_cosine
-
-                if max_cosine > 0:
+                if max_cosine > 0 and not candidate_seed.bad:  #todo: maybe some refactoring here
                     new_seeds.append(candidate_seed)
                     candidate_seed.emo.seed = True
                     candidate_seed.cosine = max_cosine
+                    candidate_seed.cycle = cycle
+                elif candidate_seed.bad:
+                    new_seeds.append(candidate_seed)
+                    candidate_seed.emo.bad_seed = True
+                    candidate_seed.cosine = 0
                     candidate_seed.cycle = cycle
 
         seed_matches.extend(new_seeds)
@@ -130,15 +184,15 @@ class RuleBootstrapper:
         :return: list of candidate Seed objects
         """
         candidate_seeds = []
-        for idx, ex in enumerate(emo_list):
-            emo = ex[0]
-            if emo.seed:
+        for example in emo_list:
+            emo = example[0]
+            if emo.seed or emo.bad_seed:
                 continue
             else:
-                cause = ex[1]
+                cause = example[1]
                 candidate_seed = Seed(emo, cause, tweet_objects[emo.tweet_idx], self.glove_size)
                 self.get_seed_contexts(candidate_seed, emo, cause)
-                emo.seed = False # initially set to False
+                emo.seed = False  # initialize to False
                 candidate_seeds.append(candidate_seed)
 
         return candidate_seeds
@@ -168,21 +222,31 @@ class RuleBootstrapper:
             for seed in seed_matches:
                 print(seed.tweet.raw, file=out)
                 cause_text = " ".join([d.text for d in seed.cause])
-                print("EMO: " + seed.emo.text + " CAUSE: " + cause_text, file=out)
+                print("EMO: " + " ".join([s.text for s in seed.emo.phrase]) + " CAUSE: " + cause_text, file=out)
                 print(str(seed.cosine) + " cycle: " + str(seed.cycle), file=out)
                 print("", file=out)
+
 
 def parse_args(args):
     parser = argparse.ArgumentParser()
     parser.add_argument('parsed_tweet_file')
     parser.add_argument('output_file')
     parser.add_argument('--glove_size', choices=[25, 50, 100], default=25)
-    parser.add_argument('--tau', type=float, default=0.85)
+    parser.add_argument('--tau', type=float, default=0.8)
+    parser.add_argument('--neg_tau', type=float, default=0.9)
     parser.add_argument('--cycles', type=float, default=10)
-    parser.add_argument('--alpha', type=float, default=0.2)
-    parser.add_argument('--beta', type=float, default=0.6)
-    parser.add_argument('--gamma', type=float, default=0.2)
+    parser.add_argument('--alpha', type=float, default=0.2)  # before context weight
+    parser.add_argument('--beta', type=float, default=0.5)  # between context weight
+    parser.add_argument('--gamma', type=float, default=0.2)  # after context weight
+    parser.add_argument('--delta', type=float, default=0)  # cause weight
+    parser.add_argument('--epsilon', type=float, default=0.1)  # emotion weight
+    parser.add_argument('--neg_alpha', type=float, default=0)  # same as alpha - epsilon but for _bad_ seeds
+    parser.add_argument('--neg_beta', type=float, default=0)
+    parser.add_argument('--neg_gamma', type=float, default=0)
+    parser.add_argument('--neg_delta', type=float, default=0.5)  # For bad seeds, the cause is often the best clue, e.g. pronouns "I" and "me"
+    parser.add_argument('--neg_epsilon', type=float, default=0.5)  # For bad seeds, the verb itself is often the best information
     return parser.parse_args(args)
+
 
 def main():
     """
@@ -192,11 +256,12 @@ def main():
     """
     args = parse_args(sys.argv[1:])
 
-    tweets = TweetLoader(args.parsed_tweet_file)
+    tweets = SnowBredsTweetLoader(args.parsed_tweet_file)
     tweets.extract_emo_relations()
-    extractor = EmotionCauseRuleExtractor()
+    extractor = SnowBredsEmotionCauseRuleExtractor()
     emo_list = extractor.build_emo_cause_list(tweets.tweet2emo, tweets.idx2tweet)
 
+    Seed.load_glove_embeddings(args.glove_size)
     bootstrapper = RuleBootstrapper(args)
     seed_matches = bootstrapper.get_seed_matches(emo_list, tweets.tweet_list)
     seed_matches = bootstrapper.run_bootstrapping(emo_list, seed_matches, tweets.tweet_list)
