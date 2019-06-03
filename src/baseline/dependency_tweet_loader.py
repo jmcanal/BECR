@@ -73,6 +73,7 @@ class TweetLoader:
         this_tweet.words = words
         this_tweet.emo_words = self.tweet2emo[tweet_idx]
         self.tweet_list.append(this_tweet)
+        return this_tweet
 
     def add_relatives(self, child2parent, idx2word):
         """

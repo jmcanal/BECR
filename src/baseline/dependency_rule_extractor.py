@@ -34,7 +34,6 @@ class EmotionCauseRuleExtractor:
 
         return self.get_dependencies(word_list, deps)
 
-
     def apply_rules(self, emo_word):
         """
         Apply the rules to get a cause for the given emotion in a tweet
@@ -54,22 +53,21 @@ class EmotionCauseRuleExtractor:
             else:
                 # Apply Rule 3
                 # Example: "exhausted from putting groceries away"
-                cause = self.get_emotion_cause(emo_word, 3)
+                cause = self.get_emotion_cause(emo_word, 1)
         elif emo_word.pos == 'A':
             if emo_word.has_children():
-                # Apply Rule 4
+                # Apply Rule 1
                 # Example: "I'm so excited for the new episode of Hannibal tomorrow"
-                cause = self.get_emotion_cause(emo_word, 4)
+                cause = self.get_emotion_cause(emo_word, 1)
             elif emo_word.parent != 0 and emo_word.parent.pos in self.VERBS:
-                # Apply Rule 5
+                # Apply Rule 3
                 # Example: "You may be interested in this evening's BBC documentary"
-                cause = self.get_emotion_cause(emo_word.parent, 5)
+                cause = self.get_emotion_cause(emo_word.parent, 3)
 
         if cause:
             return emo_word, cause
         else:
             return emo_word, None
-
 
     def get_emotion_cause(self, word, rule):
         """
@@ -84,7 +82,7 @@ class EmotionCauseRuleExtractor:
 
         if rule == 2:
             return self.strip_prepositions(lhs) if lhs else None
-        elif rule == 5:
+        elif rule == 3:
             return self.strip_prepositions(rhs[1:]) if len(rhs) > 2 else None
         else:
             return self.strip_prepositions(rhs) if rhs else None
@@ -110,18 +108,18 @@ class EmotionCauseRuleExtractor:
         """
         emo_list = []
         for tweet_id, words in emo_words.items():
-            sys.stderr.write("\nsentence_{}".format(tweet_id) + ": " + idx2tweets[tweet_id])
+            # sys.stderr.write("\nsentence_{}".format(tweet_id) + ": " + idx2tweets[tweet_id])
             for word in words:
                 emo, cause = self.apply_rules(word)
                 if cause:
-                    sys.stderr.write("EMOTION: " + emo.text + ", CAUSE: " + " ".join([d.text for d in cause]))
+                    # sys.stderr.write("EMOTION: " + emo.text + ", CAUSE: " + " ".join([d.text for d in cause]))
                     emo_list.append((emo, cause, idx2tweets[tweet_id]))
-                elif emo:
-                    sys.stderr.write("EMOTION: " + emo.text + ", NO CAUSE FOUND")
-                    continue
-                else:
-                    sys.stderr.write("NO EMOTION FOUND / NO CAUSE FOUND")
-                    continue
+                # elif emo:
+                #     sys.stderr.write("EMOTION: " + emo.text + ", NO CAUSE FOUND")
+                #     continue
+                # else:
+                #     sys.stderr.write("NO EMOTION FOUND / NO CAUSE FOUND")
+                #     continue
         return sorted(emo_list)
 
 
