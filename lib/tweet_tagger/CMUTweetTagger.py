@@ -54,7 +54,7 @@ def _call_runtagger(tweets, run_tagger_cmd=RUN_TAGGER_CMD):
     # ('hello\t!\t0.9858\nthere\tR\t0.4168\n\n',
     # 'Listening on stdin for input.  (-h for help)\nDetected text input format\nTokenized and tagged 1 tweets (2 tokens) in 7.5 seconds: 0.1 tweets/sec, 0.3 tokens/sec\n')
 
-    pos_result = result[0].decode('utf-8').strip('\n\n')  # get first line, remove final double carriage return
+    pos_result = result[0].decode('utf-8').strip('\n\n')  # get first line, remove baseline double carriage return
     pos_result = pos_result.split('\n\n')  # split messages by double carriage returns
     pos_results = [pr.split('\n') for pr in pos_result]  # split parts of message by each carriage return
     return pos_results

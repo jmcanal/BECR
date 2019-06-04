@@ -1,0 +1,83 @@
+Recall:
+
+1. Im not afraid of tomorrow, for I have seen yesterday and I love today #less
+('not afraid', 'tomorrow')
+BASELINE('love', 'today')
+
+2. #Merkel has supported all #Israeli #terror initiatives opposing the #Palestinian bid for membership at the #UN.
+('None', 'None')
+
+3. Gutted that Hannibal has finished,really hope someone pics it up for Fuller to do a 4th season or even a movie,sure @pashley13 would agree
+('gutted', 'Hannibal has finished')
+
+4. @1johndes ball watching &amp; Rojo'd header was equally dreadful!!
+('equally dreadful', "Rojo'd header")
+
+5. @ayushmannk ,,,shud have put kambli in some reality show,,he wud got wt he's craving for right now!   ! ,,,
+('craving', 'wt')
+
+6. Queer Eye for the Messiah Guy - Many modern Christians may be surprised to learn that in the time after the resurr... http://t.co/voNA0OLpSv
+('surprised', 'learn that in the time after the resurr')
+BASELINE('surprised', 'learn that in the time after the resurr')
+
+7. @nrocy As in, one can activate TimeMachine within OS X and browse your file history WITHOUT the backup drive connected!
+('None', 'None')
+
+8. Got my replacement phone from T-Mobile today. Overnighted it no charge, which is awesome. Too bad I can't get to the store until tomorrow!
+('too bad', "I can't get to the store until tomorrow")
+
+9. Caitlyn Jenner may be responsible for the death of Jon Benet Ramsey (and someone else) http://t.co/KxfO3j6snM via @SFGate #LGBT
+('None', 'None')
+BASELINE('responsible', 'the death of jon benet ramsey')
+
+10. "Sad i cant make gucci's party sat, and oskur would have made a friend with his lonely ass."
+('sad', "i cant make gucci's party sat")
+
+11. I love making lil kids upset it gives me
+('love', 'making lil kids upset')
+BASELINE('upset', 'it gives me')
+
+12. "@SuccessShawn Hey Shawn, nice seeing you this week bud! Have a great tomorrow!"
+('nice', 'seeing you this week')
+
+13. @OutdoorLoverz is this a bridge if I have to drive on such I will stop breathing Yooo I can't I'm to afraid
+('None', 'None')
+
+14. Set up a Harry Potter surprise for my niece's 11th birthday and it looks pretty coOL http://t.co/ctTNoCfIG7
+('None', 'None')
+BASELINE('surprise', "my niece's 11th birthday")
+
+15. It's such a beautiful day, I can't help but let the child in me twirl and spin!
+('None', 'None')
+
+16. "@VickieSmalley hoping to see Ant-Man tomorrow night at the Everyman in Reigate... Apparently it's been refurbished and is pretty good,"
+('hoping', 'see Ant-Man tomorrow night at the Everyman in Reigate')
+
+17. @_Adam_Price @WalesPolitics  Am afraid you're at back of BBC queue, editorially trumped by Ron Davies and bicycle paths
+('afraid', "you're at back of BBC queue")
+BASELINE('afraid', "you're at back of bbc queue")
+
+18. @RayGemini I've got 8 coming back this week. It's so joyous isn't it haha
+('so joyous', 'it')
+
+19. soo this growing natural isnt tht bad. but ima change my hair up.
+('isnt tht bad', 'this growing natural')
+
+20. @VanBluesat @infrared_rock Among them, is Hawrelak Park and the stage they have there. A great venue. #livemusic #blues
+('None', 'None')
+
+21. "Not sure why Kane didn't start, he's miles infront of Vardy and also needs more international experience and goals for Tuesday game!!"
+('not sure', "why kane didn't start")
+
+22. why pack for moving to college tomorrow when you can watch three different trailers for Ant-man instead
+('None', 'None')
+
+23. TGIF! Less than a week til Bill Conger's lecture at 6pm on Sep 9. Make sure you come to #SoundsLike to see his work before u hear his talk!
+('None', 'None')
+
+24. not afraid of tomorrow, for I have seen yesterday and I love today #less
+('not afraid', 'tomorrow')
+BASELINE('love', 'today')
+
+25. Hot yoga was intense tonight. Hope I can handle the power vinyasa class on Friday. Eeek
+('intense', 'hot yoga')
