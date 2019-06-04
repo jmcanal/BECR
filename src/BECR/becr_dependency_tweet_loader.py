@@ -1,23 +1,19 @@
 """
-Load dependency parsed tweets for SnowBreds algorithm
+Load dependency parsed tweets for BECR algorithm
 """
 import sys
-import pickle
-from collections import defaultdict as dd
+import os.path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.word_node import WordNode as Word
-from src.tweet import Tweet
 from src.baseline.dependency_tweet_loader import TweetLoader
 
 
-class SnowBredsTweetLoader(TweetLoader):
+class BECRTweetLoader(TweetLoader):
 
     NEGATION = ('don\'t', 'doesn\'t', 'didn\'t', 'won\'t', 'not', 'no', 'isn\'t')
     NEGATED_POS = ("R", "D", "V")
     ADVERB = "R"
     VERB = "V"
-
-    def __init__(self, file):
-        self.loader = TweetLoader(file)  #todo: switch to super method?
 
     def extract_emo_relations(self):
         """
@@ -26,13 +22,10 @@ class SnowBredsTweetLoader(TweetLoader):
         of Word objects instead of single Word objects
         :return:
         """
-        for tweet_idx, tweet in enumerate(self.loader.tweets):
+        for tweet_idx, tweet in enumerate(self.tweets):
             tweet_tokens = []
             idx2word, child2parent = {}, {}
             for word in tweet.rstrip().split('\n'):
-                if not word:
-                    sys.stderr.write("wat")
-                    continue
                 curr_word = Word(word.rstrip().split('\t'), tweet_idx)
                 idx2word[curr_word.idx] = curr_word
                 child2parent[curr_word] = curr_word.parent
@@ -40,18 +33,18 @@ class SnowBredsTweetLoader(TweetLoader):
                 tweet_tokens.append(curr_word.original_text)
 
             # update tweet dictionary and add children to words
-            self.loader.add_relatives(child2parent, idx2word)
+            self.add_relatives(child2parent, idx2word)
             tweet_text = " ".join(tweet_tokens)
-            self.loader.idx2tweet[tweet_idx] = tweet_text
+            self.idx2tweet[tweet_idx] = tweet_text
 
             # Create Tweet object
-            tweet = self.loader.add_tweet(tweet_idx, tweet_text, tweet_tokens, list(idx2word.values()))
+            tweet = self.add_tweet(tweet_idx, tweet_text, tweet_tokens, list(idx2word.values()))
 
             # Isolate emotion words that are Verbs or Adjectives
             for word in tweet.words:
-                if word.text in self.loader.emo_kws and word.pos in self.loader.POS_LIST:
+                if word.text in self.emo_kws and word.pos in self.POS_LIST:
                     word_context = self.get_word_context(word, tweet)
-                    self.loader.tweet2emo[tweet_idx].append(word)
+                    self.tweet2emo[tweet_idx].append(word)
                     word.emo = True
                     word.phrase = word_context
 
@@ -66,15 +59,18 @@ class SnowBredsTweetLoader(TweetLoader):
         prev = tweet.words[word.idx - 2] if word.idx > 0 else None
         prev_prev = tweet.words[word.idx - 3] if word.idx > 1 else None
 
-        # Not currently capturing longer-distance negation,
-        # e.g. "I don't think he has to worry about turning into Batman"
+        # Not currently capturing longer-distance negation, or lots of modals
+        # e.g. I would have been happy if we went there or I don't usually really like sushi
         if prev:
-            # Looking for examples like "not afraid"
+            # "not afraid"
             if prev.text in self.NEGATION:
+                word_context.insert(0, prev)
+            # "so excited"
+            if prev.pos in self.ADVERB:
                 word_context.insert(0, prev)
             elif prev_prev:
                 # Looking for examples like: "Don't really like" or "Won't be happy"
-                if prev_prev.text in self.NEGATION and (prev.pos in self.ADVERB or prev.pos in self.VERB): #todo check this because maybe it's too broad
+                if prev_prev.text in self.NEGATION and (prev.pos in self.ADVERB or prev.pos in self.VERB):
                     word_context = [prev_prev, prev] + word_context
 
         return word_context

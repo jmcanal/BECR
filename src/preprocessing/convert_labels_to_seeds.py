@@ -1,6 +1,6 @@
 """
 Script for converting labeled training data
-to seed dictionary for SnowBreds algorithm
+to seed dictionary for BECR algorithm
 """
 
 import sys

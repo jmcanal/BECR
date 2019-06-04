@@ -27,7 +27,7 @@ class EmoLexicon:
         """
         self.lexicon_type = lexicon_type
         self.lexicon = self.setup(lexicon_file)
-        self.lib_path = '../lib/emotion_lexicon/'
+        self.lib_path = '../../lib/emotion_lexicon/'
 
     def setup(self, lexicon_file):
         """
