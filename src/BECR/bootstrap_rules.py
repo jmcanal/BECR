@@ -15,20 +15,16 @@ from src.BECR.seed import Seed
 from src.BECR.becr_dependency_rule_extractor import BECREmotionCauseRuleExtractor
 from src.BECR.becr_dependency_tweet_loader import BECRTweetLoader
 import argparse
-import time
+from collections import defaultdict as dd
 
 
 class RuleBootstrapper:
-
-    # Loading pre-identified emo-cause seed pairs in dictionary format
-    seed_pairs = pickle.load(open('../../lib/seeds/train_seeds.pkl', "rb"))
 
     def __init__(self, args):
         """
         Initialize by setting tau and cycle thresholds for cosine similarity scores between seed matches and
         candidate seeds
-        :param tau: tau threshold value
-        :param cycles: cycle value
+        :param args: args
         """
         self.tau = args.tau
         self.neg_tau = args.neg_tau
@@ -44,6 +40,12 @@ class RuleBootstrapper:
         self.neg_delta = args.neg_delta
         self.neg_epsilon = args.neg_epsilon
         self.glove_size = args.glove_size
+        self.is_test = args.test
+
+        if self.is_test:
+            self.seed_pairs = pickle.load(open('../../lib/seeds/test_seeds.pkl', "rb"))
+        else:
+            self.seed_pairs = pickle.load(open('../../lib/seeds/train_seeds.pkl', "rb"))
 
     def get_seed_matches(self, emo_list, tweet_objects):
         """
@@ -212,12 +214,20 @@ class RuleBootstrapper:
         :param output: the output file name
         :return: void
         """
-        with open(output, 'w') as out:
+        if not self.is_test:
+            test_seeds = dd(list)
             for seed in seed_matches:
-                print(seed.tweet.raw, file=out)
+                emo = " ".join([s.text for s in seed.emo.phrase])
+                cause = " ".join([d.text for d in seed.cause])
+                test_seeds[emo].extend(cause)
+            pickle.dump(test_seeds, open('../../lib/seeds/test_seeds.pkl', 'wb'))
+
+        with open(output, 'w') as out:
+            for seed in sorted(seed_matches, key=lambda x: -x.cosine):
+                emo_text = " ".join([s.text for s in seed.emo.phrase])
                 cause_text = " ".join([d.text for d in seed.cause])
-                print("EMO: " + " ".join([s.text for s in seed.emo.phrase]) + " CAUSE: " + cause_text, file=out)
-                print(str(seed.cosine) + " cycle: " + str(seed.cycle), file=out)
+                print("EMOTION: " + emo_text + "\tCAUSE: " + cause_text + "\tTWEET:" + seed.tweet.raw, file=out)
+                # print(str(seed.cosine) + " cycle: " + str(seed.cycle), file=out)
                 print("", file=out)
 
 
@@ -239,6 +249,7 @@ def parse_args(args):
     parser.add_argument('--neg_gamma', type=float, default=0)
     parser.add_argument('--neg_delta', type=float, default=0.5)  # For bad seeds, the cause is often the best clue, e.g. pronouns "I" and "me"
     parser.add_argument('--neg_epsilon', type=float, default=0.5)  # For bad seeds, the verb itself is often the best information
+    parser.add_argument('--test', action='store_true')
     return parser.parse_args(args)
 
 
