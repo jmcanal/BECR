@@ -11,9 +11,9 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 from scipy import spatial
 import pickle
-from src.SnowBreds.seed import Seed
-from src.SnowBreds.snowbreds_dependency_rule_extractor import SnowBredsEmotionCauseRuleExtractor
-from src.SnowBreds.snowbreds_dependency_tweet_loader import SnowBredsTweetLoader
+from src.BECR.seed import Seed
+from src.BECR.becr_dependency_rule_extractor import BECREmotionCauseRuleExtractor
+from src.BECR.becr_dependency_tweet_loader import BECRTweetLoader
 import argparse
 import time
 
@@ -54,13 +54,7 @@ class RuleBootstrapper:
         :return: list of Seed objects
         """
 
-        neg_seed_pairs = {'love': ['i', 'hollywood', 'the tory press'],
-                          'hate': ['i', 'reddit', 'kpop fandoms'],
-                          'regret': ['iran'],
-                          'surprise': ['me'],
-                          'hurt': ['you'],
-                          'don\'t worry': ['me and my mans @ jjb1owens'],
-                          'mean':['i']}
+        neg_seed_pairs = {}
 
         seed_matches = []
         for ex in emo_list:
@@ -256,9 +250,9 @@ def main():
     """
     args = parse_args(sys.argv[1:])
 
-    tweets = SnowBredsTweetLoader(args.parsed_tweet_file)
+    tweets = BECRTweetLoader(args.parsed_tweet_file)
     tweets.extract_emo_relations()
-    extractor = SnowBredsEmotionCauseRuleExtractor()
+    extractor = BECREmotionCauseRuleExtractor()
     emo_list = extractor.build_emo_cause_list(tweets.tweet2emo, tweets.idx2tweet)
 
     Seed.load_glove_embeddings(args.glove_size)

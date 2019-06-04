@@ -7,6 +7,7 @@ from collections import defaultdict as dd
 from src.word_node import WordNode as Word
 from src.tweet import Tweet
 
+
 class TweetLoader:
 
     POS_LIST = ('V', 'A')
@@ -23,8 +24,10 @@ class TweetLoader:
         Initialize this class by reading in the tweets
         :param file_name: the name of the input file
         """
-        with open(file_name, 'r') as f:
-            self.tweets = f.read().rstrip().split('\n\n')
+        with open(file_name, mode='r', errors='ignore') as f:
+
+            tweets = f.read()
+            self.tweets = tweets.rstrip().split('\n\n')
 
     def extract_emo_relations(self):
         """

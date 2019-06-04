@@ -17,7 +17,6 @@ furious
 hostile
 incensed
 indignant
-inflamed
 infuriated
 irate
 irritated
@@ -33,17 +32,12 @@ sullen
 virulent
 wrathful
 Sad
-aching
-afflicted
 agonized
 anguished
 bereaved
-blue
 cheerless
-clouded
 crestfallen
 crushed
-dark
 dejected
 depressed
 despairing
@@ -56,16 +50,12 @@ dismal
 displeased
 distressed
 dolorous
-down
 downcast
 downhearted
 dreadful
 dreary
-dull
 embarrassed
-flat
 frowning
-funereal
 gloomy
 glum
 grief-stricken
@@ -79,7 +69,6 @@ hurt
 injured
 joyless
 lonely
-low
 lugubrious
 melancholy
 moody
@@ -109,14 +98,10 @@ woebegone
 woeful
 worried
 Happy
-airy
 amused
-animated
 beatific
 blissful
 blithe
-bright
-brisk
 buoyant
 cheerful
 cheery
@@ -131,7 +116,6 @@ excited
 exhilarated
 exultant
 festive
-frisky
 genial
 glad
 gleeful
@@ -140,7 +124,6 @@ happy
 high-spirited
 hilarious
 humorous
-important
 inspired
 jaunty
 jocular
@@ -152,8 +135,6 @@ jubilant
 laughing
 light-hearted
 lively
-lucky
-merry
 mirthful
 overjoyed
 peaceful
@@ -165,14 +146,12 @@ satisfied
 saucy
 self-satisfied
 serene
-sparkling
 spirited
 sprightly
 sunny
 terrific
 thankful
 tranquil
-transported
 vivacious
 Ecstatic
 delighted
@@ -180,10 +159,6 @@ ecstatic
 fabulous
 fantastic
 overjoyed
-Power
-Control
-Responsibility
-Irresistible
 aggressive
 exuberent
 immortal
@@ -195,7 +170,6 @@ powerful
 unstoppable
 Powerless
 bashful
-blocked
 defeated
 discouraged
 disorganized
@@ -208,8 +182,6 @@ stifled
 thwarted
 abused
 careless
-controlled
-forced
 impotent
 obligated
 obliterated
@@ -236,11 +208,8 @@ composed
 confident
 encouraged
 excited
-organized
 responsible
 Attachment
-Alone
-alone
 excluded
 forsaken
 isolated
@@ -254,8 +223,6 @@ arrogant
 autonomous
 cocky
 independent
-strong
-macho
 Attached
 affectionate
 attached
@@ -288,7 +255,6 @@ ignored
 overlooked
 punished
 rejected
-replaced
 unapproved of
 unlovable
 unloved
@@ -314,31 +280,19 @@ disgraced
 disrespected
 insignificant
 underestimated
-unsupported
 Embarrassed
 ashamed
 awkward
 disparaged
 embarrassed
 guilty
-Average
-average
-common
-ordinary
-Esteemed
-admired
 appreciated
 esteemed
-respected
 revered
 significant
-supported
 valued
 worshiped
 Justice
-Cheated
-abused
-accused
 betrayed
 cheated
 coerced
@@ -348,9 +302,7 @@ disparaged
 duped
 exploited
 framed
-lied to
 manipulated
-tricked
 victimized
 violated
 Singled out
@@ -377,7 +329,6 @@ Entitled
 entitled
 exempt
 favored
-immune
 privileged
 Freedom
 Trapped
@@ -393,26 +344,17 @@ Burdened
 burdened
 obligated
 pressured
-put upon
 thwarted
-Free
 autonomous
-free
 independent
-released
 unshackled
-Direction
-Focus
 Derailed
 derailed
 disjointed
 disoriented
-torn
-Lost
 baffled
 bewildered
 confused
-lost
 unfocussed
 Focused
 committed
@@ -441,17 +383,13 @@ apathetic
 bored
 complacent
 full of ennui
-indifferent
 lackadaisical
 unmotivated
 Attracted
 absorbed
-affected
 agog
 anxious
 attracted
-avid
-challenged
 concerned
 confident
 craving
@@ -475,7 +413,6 @@ interested
 intrigued
 keen
 motivated
-needed
 nosey
 snoopy
 zealous
@@ -489,7 +426,6 @@ lustful
 needy
 passionate
 yearning
-Safety
 Security
 Fearful
 afraid
@@ -580,7 +516,6 @@ secure
 self-reliant
 spirited
 stout hearted
-Safe
 at ease
 calm
 comfortable
@@ -627,8 +562,6 @@ dehumanized
 dependent
 desperate
 destructive
-different
-dim
 disqualified
 disregarded
 dissatisfied
@@ -637,11 +570,8 @@ disturbed
 divided
 dominated
 drained
-droopy
 dumb
-earthy
 embittered
-empty
 energetic
 enlightened
 envious
@@ -649,7 +579,6 @@ evil
 exasperated
 failure
 fatigued
-firm
 flustered
 fond
 foolish
@@ -658,9 +587,7 @@ fortunate
 frank
 frantic
 friendly
-frozen
 fulfilled
-full
 futile
 generous
 giddy
@@ -669,7 +596,6 @@ grateful
 greedy
 gullible
 harried
-hasty
 haughty
 helpful
 helpless
@@ -696,7 +622,6 @@ lenient
 longing
 lovable
 mature
-mean
 meditative
 methodical
 miserable
@@ -704,11 +629,9 @@ misery
 misinterpreted
 mocked
 murderous
-natural
 naughty
 nice
 obnoxious
-odd
 one-upped
 optimistic
 out of place
@@ -732,16 +655,12 @@ responsive
 restless
 restrained
 revengeful
-rewarded
 ridiculous
-right
-routine
 sceptical
 scornful
 self-confident
 self-doubt
 servile
-sharp
 shy
 sick
 silly
@@ -776,7 +695,6 @@ tired
 tolerant
 troubled
 trusted
-ugly
 unappreciated
 unaware
 undecided
@@ -789,13 +707,11 @@ unfulfilled
 unified
 unmatched
 unsettled
-unsupported
 unstable
 unsure
 unwanted
 unworthy
 uptight
-used
 useless
 vehement
 vigilant
@@ -848,10 +764,8 @@ elation
 satisfaction
 ecstasy
 euphoria
-Zest
 Enthusiasm
 zeal
-zest
 excitement
 thrill
 exhilaration
@@ -946,7 +860,6 @@ neglect
 loneliness
 rejection
 homesickness
-defeat
 dejection
 insecurity
 embarrassment
