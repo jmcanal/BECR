@@ -4,7 +4,7 @@ Randomly sample 20 tweets from for recall calculation
 import random
 
 file = '../data/preprocessed/split/filtered_tweets_test.txt'
-output = '../results/final/recall_filtered_test_25.txt'
+output = '../results/baseline/recall_filtered_test_25.txt'
 
 with open(file, "r") as f:
     tweets = f.read().split('\n')

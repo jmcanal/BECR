@@ -42,7 +42,7 @@ class EmotionCauseRuleExtractor:
         """
         cause = None
         if emo_word.pos in self.VERBS and emo_word.has_children():
-            if emo_word.parent.text in self.MODALS and emo_word.parent.pos == 'V':
+            if emo_word.parent and emo_word.parent.text in self.MODALS and emo_word.parent.pos == 'V':
                 # Apply Rule 2
                 # Example: "The results may surprise you."
                 cause = self.get_emotion_cause(emo_word.parent, 2)
@@ -136,8 +136,7 @@ def main():
     with open(output, 'w') as out:
         for emotion, cause, sentence in emo_list:
             cause = " ".join([d.text for d in cause])
-            print(sentence)
-            print("EMOTION: " + emotion.text + " CAUSE: " + cause + " SENTENCE: " + sentence, file=out)
+            print("EMOTION: " + emotion.text + "\tCAUSE: " + cause + "\tTWEET: " + sentence, file=out)
 
 
 if __name__ == "__main__":
