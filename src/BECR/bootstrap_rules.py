@@ -41,10 +41,9 @@ class RuleBootstrapper:
         self.neg_epsilon = args.neg_epsilon
         self.glove_size = args.glove_size
         self.is_test = args.test
+        self.new_test_seeds = []
 
-        if self.is_test:
-            self.seed_pairs = pickle.load(open('../../lib/seeds/test_seeds.pkl', "rb"))
-        else:
+        if not self.is_test:
             self.seed_pairs = pickle.load(open('../../lib/seeds/train_seeds.pkl', "rb"))
 
     def get_seed_matches(self, emo_list, tweet_objects):
@@ -133,6 +132,7 @@ class RuleBootstrapper:
         :param seed_matches: list of matching Seed objects
         :param tau: tau value
         :param cycle: cycle value
+        :param new_test_seeds: new seeds found in test run; not used in train run
         :return: void
         """
         new_seeds = []
@@ -170,7 +170,11 @@ class RuleBootstrapper:
                     candidate_seed.cosine = 0
                     candidate_seed.cycle = cycle
 
-        seed_matches.extend(new_seeds)
+        if self.is_test:
+            self.new_test_seeds.extend(new_seeds)
+        else:
+            seed_matches.extend(new_seeds)  # todo: if we want the system to learn new seed matches at test phase, add this step to test phase
+
 
     def set_all_contexts(self, emo_list, tweet_objects):
         """
@@ -202,10 +206,14 @@ class RuleBootstrapper:
         :return: updated list of Seed object matches
         """
         candidates = self.set_all_contexts(emo_list, tweet_objects)
-        for i in range(self.cycles):
-            self.find_new_relations(candidates, seed_matches, self.tau, i+1)
 
-        return seed_matches
+        if not self.is_test:
+            for i in range(self.cycles):
+                self.find_new_relations(candidates, seed_matches, self.tau, i+1)
+            return seed_matches
+        else:  # todo: check -- currently this only cycles through train seeds once; no additional seeds are added
+            self.find_new_relations(candidates, seed_matches, self.tau, 0)
+            return self.new_test_seeds
 
     def print_emo_causes(self, seed_matches, output):
         """
@@ -215,19 +223,14 @@ class RuleBootstrapper:
         :return: void
         """
         if not self.is_test:
-            test_seeds = dd(list)
-            for seed in seed_matches:
-                emo = " ".join([s.text for s in seed.emo.phrase])
-                cause = " ".join([d.text for d in seed.cause])
-                test_seeds[emo].extend(cause)
-            pickle.dump(test_seeds, open('../../lib/seeds/test_seeds.pkl', 'wb'))
+            pickle.dump(seed_matches, open('../../lib/seeds/test_seeds.pkl', 'wb'))
 
         with open(output, 'w') as out:
             for seed in sorted(seed_matches, key=lambda x: -x.cosine):
                 emo_text = " ".join([s.text for s in seed.emo.phrase])
                 cause_text = " ".join([d.text for d in seed.cause])
                 print("EMOTION: " + emo_text + "\tCAUSE: " + cause_text + "\tTWEET:" + seed.tweet.raw, file=out)
-                # print(str(seed.cosine) + " cycle: " + str(seed.cycle), file=out)
+                print(str(seed.cosine) + " cycle: " + str(seed.cycle), file=out)
                 print("", file=out)
 
 
@@ -268,7 +271,12 @@ def main():
 
     Seed.load_glove_embeddings(args.glove_size)
     bootstrapper = RuleBootstrapper(args)
-    seed_matches = bootstrapper.get_seed_matches(emo_list, tweets.tweet_list)
+
+    if not args.test:
+        seed_matches = bootstrapper.get_seed_matches(emo_list, tweets.tweet_list)
+    else:
+        seed_matches = pickle.load(open('../../lib/seeds/test_seeds.pkl', "rb"))  # this pickle file is a list of Seed objects
+
     seed_matches = bootstrapper.run_bootstrapping(emo_list, seed_matches, tweets.tweet_list)
     bootstrapper.print_emo_causes(seed_matches, args.output_file)
 
