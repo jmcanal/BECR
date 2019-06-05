@@ -7,55 +7,64 @@ import sys
 import random
 from difflib import SequenceMatcher
 
-def load_emo_causes(emotion_cause_file):
+
+class EmoCause:
+
+    def __init__(self, tweet, emo, cause, relaxed):
+        self.tweet = tweet
+        self.emo = emo
+        self.cause = cause
+        self.percent = 0.99 if relaxed else 0.7
+
+    def __eq__(self, other):
+        t_sim = SequenceMatcher(a=self.tweet, b=other.tweet).ratio()
+        tweet_eq = t_sim > self.percent
+        e_sim = SequenceMatcher(a=self.emo, b=other.emo).ratio()
+        emo_eq = e_sim > self.percent
+        c_sim = SequenceMatcher(a=self.cause, b=other.cause).ratio()
+        cause_eq = c_sim > self.percent
+        return tweet_eq and emo_eq and cause_eq
+
+    def __hash__(self):
+        return hash(self.emo + self.cause)
+
+
+def load_emo_causes(emotion_cause_file, relaxed=False):
     """
     Load emotion cause results into a list of tuples
     :param emotion_cause_file: an emotion cause file
     :return: list of tuples
     """
-    with open(emotion_cause_file, 'r') as ec:
-        tweets = ec.read().split('\n')
+    with open(emotion_cause_file, mode='r', errors='ignore') as ec:
+        tweets = ec.read()
+        tweets = tweets.split('\n\n')
 
     emotion_cause_list = set()
-    emotion_cause_dict = {}
     for tweet in tweets:
         if not tweet:
             continue
         tweet_info = tweet.split('\t')
-        tweet_text = tweet_info[2].split(': ')[1]
-        emotion = tweet_info[0].split(': ')[1]
-        cause = tweet_info[1].split(': ')[1]
+        tweet_text = tweet_info[2].split(':')[1].strip()
+        emotion = tweet_info[0].split(':')[1].strip()
+        cause = tweet_info[1].split(':')[1].strip()
 
-        emotion_cause_list.add((tweet_text, emotion, cause))
-        emotion_cause_dict[tweet_text] = (emotion, cause)
+        emotion_cause_list.add(EmoCause(tweet_text, emotion, cause, relaxed))
 
-    return emotion_cause_list, emotion_cause_dict
+    return emotion_cause_list
 
-def calculate_recall(cause_file, gold_file, out):
+def calculate_recall(cause_file, gold_file, total, relaxed=False):
     """
     Calculate recall based on the randomly sampled labeled file
     :param cause_file: the emotion cause output file
     :param gold_file: the labeled file
     :return: the recall value
     """
-    gold_labels, gold_tweet_dict = load_emo_causes(gold_file)
-    emo_causes, emo_tweet_dict = load_emo_causes(cause_file)
-    count = 0
+    gold_labels = load_emo_causes(gold_file, relaxed)
+    emo_causes = load_emo_causes(cause_file, relaxed)
 
-    print("Recall:", file=out)
+    missing = len(gold_labels.intersection(emo_causes))
 
-    for tweet1, emo_cause1 in gold_tweet_dict.items():
-        count += 1
-        gold_tweet = tweet1.lower()
-        print("\n{}. ".format(count) + tweet1, file=out)
-        print(str(emo_cause1), file=out)
-        for tweet2, emo_cause2 in emo_tweet_dict.items():
-            if SequenceMatcher(a=gold_tweet, b=tweet2).ratio() > 0.99:
-                print("BASELINE" + str(emo_cause2), file=out)
-
-    # missing = len(gold_labels - emo_causes)
-
-    # return (25. - float(missing)) / 25.
+    return (25. - float(missing)) / 25.
 
 def pull_precision(cause_file, precision_file):
     """
@@ -71,21 +80,23 @@ def pull_precision(cause_file, precision_file):
         for emo_cause in sample_emo_causes:
             print("EMOTION: " + emo_cause[1] + "\tCAUSE: " + emo_cause[2] + '\tTWEET: ' + emo_cause[0], file=p)
 
-def get_precision(precision_file):
+def get_precision(precision_file, total, relaxed=False):
     """
     Calculate precision from the labeled precision file
     :param precision_file: the labeled precision file
     :return: the precision value
     """
-    with open(precision_file, 'r') as p:
+    with open(precision_file, 'r', errors='ignore') as p:
         tweets = p.read().split('\n')
 
     correct = 0
     for tweet in tweets:
         if tweet.startswith('1'):
             correct += 1
+        if relaxed and tweet.startswith('0.5'):
+            correct += 1
 
-    return float(correct) / 20.
+    return float(correct) / float(total)
 
 def calculate_f_score(precision, recall):
     """
@@ -105,17 +116,30 @@ def main():
     gold_label_file = sys.argv[2]
     precision_file = sys.argv[3]
     output_file = sys.argv[4]
+    total = sys.argv[5]
 
     with open(output_file, 'w') as out:
-        calculate_recall(emotion_cause_file, gold_label_file, out)
-        # print("Recall: ", file=out)
+        recall = calculate_recall(emotion_cause_file, gold_label_file, total)
+        print("Recall: " + str(recall), file=out)
         if os.stat(precision_file).st_size == 0:
             pull_precision(emotion_cause_file, precision_file)
-        # else:
-        #     precision = get_precision(precision_file)
-        #     f_score = calculate_f_score(precision, recall)
-        #     print("Precision: " + str(precision), file=out)
-        #     print("F-Score: " + str(f_score), file=out)
+        else:
+            precision = get_precision(precision_file, total)
+            f_score = calculate_f_score(precision, recall)
+            print("Precision: " + str(precision), file=out)
+            print("F-Score: " + str(f_score), file=out)
+
+    with open(output_file + '_relaxed', 'w') as out:
+        recall = calculate_recall(emotion_cause_file, gold_label_file, total, True)
+        print("Recall: " + str(recall), file=out)
+        if os.stat(precision_file).st_size == 0:
+            pull_precision(emotion_cause_file, precision_file)
+        else:
+            precision = get_precision(precision_file, total, True)
+            f_score = calculate_f_score(precision, recall)
+            print("Precision: " + str(precision), file=out)
+            print("F-Score: " + str(f_score), file=out)
+
 
 if __name__ == "__main__":
     main()

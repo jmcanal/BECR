@@ -1,0 +1,49 @@
+0 EMOTION: hate	CAUSE: hate hate hate hate	TWEET:Hate hate hate hate hate hate hate
+
+0 EMOTION: hate	CAUSE: hate hate hate	TWEET:Hate hate hate hate hate hate hate
+
+0 EMOTION: hate	CAUSE: hate hate	TWEET:Hate hate hate hate hate hate hate
+
+0 EMOTION: hate	CAUSE: hate	TWEET:Hate hate hate hate hate hate hate
+
+0.5 EMOTION: so happy	CAUSE: see that	TWEET:So happy to see that Royal Blood are now supporting the Foo Fighters at Milton Keynes on 5 September .. As well ... http://t.co/VEJQmnM3ZZ
+
+1 EMOTION: just love	CAUSE: opening my mailbox and finding it full of christmas cards	TWEET:I just love opening my mailbox and finding it full of Christmas cards .
+
+1 EMOTION: hope	CAUSE: it comes true	TWEET:The other night I had a dream UGA beat Boise State . Let's hope it comes true
+
+0 EMOTION: good	CAUSE: hell	TWEET:NW Road . This shit good as hell
+
+1 EMOTION: hope	CAUSE: erdogan's mentors won't translate into the turkish	TWEET:@dlepeska @TimepDC Dear David , I hope Erdogan's mentors won't translate into the Turkish , otherwise he may use it against Egpytian leader :)
+
+1 EMOTION: hope	CAUSE: i get my ipad tomorrow so i can stream the apple keynote address in school	TWEET:I hope I get my iPad tomorrow so I can stream the Apple Keynote Address in school
+
+1 EMOTION: absolutely loved	CAUSE: @kathielgifford's testimony of faith about frank gifford on @todayshow this mon am	TWEET:Hi @KyleMichael ! I absolutely loved @KathieLGifford's testimony of faith about Frank Gifford on @TODAYshow this Mon AM . Beautiful tribute !
+
+1 EMOTION: kinda liked	CAUSE: the 3rd one	TWEET:@JoAnnRoss I kinda liked the 3rd one ... my grandson loves them all . We've been to Jurassic World movie 3 times .
+
+0.5 EMOTION: so sure	CAUSE: international lnk	TWEET:@yearsandyearsUS last hour of the Chris Evans show BBC R2 from 8am Tuesday if you haven't got it indexed . Not so sure about international lnk
+
+1 EMOTION: love	CAUSE: pple that that tend to defy their typical stereotype me	TWEET:i love pple that that tend to defy their typical stereotype me
+
+1 EMOTION: so good	CAUSE: it was'nt for pain	TWEET:would'nt feel so good if it was'nt for PAIN !
+
+1 EMOTION: not not afraid	CAUSE: tomorrow	TWEET:Rt “ @RevRunWisdom : not afraid of tomorrow , for I have seen yesterday and I love today #less ”
+
+1 EMOTION: love	CAUSE: today	TWEET:Rt “ @RevRunWisdom : not afraid of tomorrow , for I have seen yesterday and I love today #less ”
+
+1 EMOTION: absolutely loved	CAUSE: it	TWEET:I saw Paper Towns on Friday with some friends and it was AMAZING ! It might have been different from the book but I absolutely loved it !! :D
+
+0 EMOTION: sure	CAUSE: you enjoy	TWEET:It's Friday and National Ice Cream Day and Food Truck Friday @moosebtown so make sure you enjoy ! #btowneats
+
+0.5 EMOTION: attacked	CAUSE: tom's rabid fans to whom	TWEET:@snowangel415 @cjwalters66 Maybe also being attacked by Tom's rabid fans to whom he & his clothes were always perfect also put me off him ...
+
+1 EMOTION: happy	CAUSE: you	TWEET:" On this day October 16 , 17 year old 114days old Lionel made his official league debut for Barca by coach Frank Rijkaard ... xo happy for you ... "
+
+1 EMOTION: hope	CAUSE: i can handle the power vinyasa class on friday	TWEET:Hot yoga was intense tonight . Hope I can handle the power vinyasa class on Friday . Eeek
+
+0 EMOTION: sure	CAUSE: you eat plenty of ice cream this sunday	TWEET:Make sure you eat plenty of ice cream this Sunday ! It's National Ice Cream Day ! http://t.co/7SuL54iAeQ http://t.co/nSq9PVln6A
+
+1 EMOTION: hate	CAUSE: winter	TWEET:@MasterTomTheDom I hate winter , I dread it's arrival .
+
+1 EMOTION: dread	CAUSE: it's arrival	TWEET:@MasterTomTheDom I hate winter , I dread it's arrival .

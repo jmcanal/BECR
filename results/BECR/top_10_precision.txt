@@ -1,0 +1,23 @@
+0 EMOTION: hate	CAUSE: hate hate hate hate	TWEET:Hate hate hate hate hate hate hate
+
+0 EMOTION: hate	CAUSE: hate hate hate	TWEET:Hate hate hate hate hate hate hate
+
+0 EMOTION: hate	CAUSE: hate hate	TWEET:Hate hate hate hate hate hate hate
+
+0 EMOTION: hate	CAUSE: hate	TWEET:Hate hate hate hate hate hate hate
+
+0.5 EMOTION: so happy	CAUSE: see that	TWEET:So happy to see that Royal Blood are now supporting the Foo Fighters at Milton Keynes on 5 September .. As well ... http://t.co/VEJQmnM3ZZ
+
+1 EMOTION: just love	CAUSE: opening my mailbox and finding it full of christmas cards	TWEET:I just love opening my
+ mailbox and finding it full of Christmas cards .
+
+1 EMOTION: hope	CAUSE: it comes true	TWEET:The other night I had a dream UGA beat Boise State . Let's hope it comes
+true
+
+0 EMOTION: good	CAUSE: hell	TWEET:NW Road . This shit good as hell
+
+1 EMOTION: hope	CAUSE: erdogan's mentors won't translate into the turkish	TWEET:@dlepeska @TimepDC Dear David , I hope
+ Erdogan's mentors won't translate into the Turkish , otherwise he may use it against Egpytian leader :)
+
+1 EMOTION: hope	CAUSE: i get my ipad tomorrow so i can stream the apple keynote address in school	TWEET:I hope I get
+my iPad tomorrow so I can stream the Apple Keynote Address in school

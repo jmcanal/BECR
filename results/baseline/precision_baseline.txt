@@ -1,25 +1,50 @@
 EMOTION: included	CAUSE: the playlist	TWEET: wow :o this was included in the playlist #awesome
+
 EMOTION: excited	CAUSE: learn about from @microsoft tomorrow	TWEET: we're excited to learn about #cloud #analytics from @microsoft tomorrow ! join us https://t.co/p0bmrebbhc #tech #rva http://t.co/1xhmpdsvzq
+
 EMOTION: afraid	CAUSE: tomorrow	TWEET: i'm not afraid of tomorrow , for i have seen yesterday and i love today #less #faith
+
 EMOTION: exhausted	CAUSE: putting groceries away	TWEET: bernie sanders joined a picket line in the sun & after gave a 3hr speech . i'm significantly younger & exhausted from putting groceries away .
+
 EMOTION: excited	CAUSE: the new episode of hannibal tomorrow	TWEET: i'm so excited for the new episode of hannibal tomorrow * cries *
+
 EMOTION: suffering	CAUSE: bhopal	TWEET: i have to say you are a nasty , greedy arsehole without conscience - how many dead and suffering from bhopal ?
+
 EMOTION: bad	CAUSE: you	TWEET: yo if last friday night by katy perry doesn't take you back to bomb middle school days then i feel very bad for you
+
 EMOTION: snubbed	CAUSE: charlie hebdo march and paris	TWEET: @foxnewsinsider thank you @greta to make hollande come here after obama snubbed charlie hebdo march and paris is a national embarrassment
+
 EMOTION: bad	CAUSE: sex	TWEET: i may be bad at sex but i just beat brock lesnar at summerslam for the wwe championship so who's really winning ?
+
 EMOTION: hope	CAUSE: i cop some cash	TWEET: thursday i'm going to sing at venice beach hope i cop some cash #prayforang #mixtapecominsoon
+
 EMOTION: hate	CAUSE: country music	TWEET: i'm going to jason aldean thurs ... i hate country music ...
+
 EMOTION: love	CAUSE: that song	TWEET: just take me back to saturday when jason aldean sang big green tractor because i fucking love that song and it was 17373x's better live
+
 EMOTION: hope	CAUSE: he doesn't angrily destroy his birthday cake like i did on my 2nd birthday	TWEET: prince george is two today . i hope he doesn't angrily destroy his birthday cake like i did on my 2nd birthday #familylegend
+
 EMOTION: active	CAUSE: tomorrow if	TWEET: " @nickclark32 if the ira came active again tomorrow , just as big ( if not bigger ) threat to uk than muslim extremists . @sophiesweb33 "
+
 EMOTION: secure	CAUSE: he	TWEET: rick perry said he was the zar of stopping illegals sat there and glossed himself for 2 months how he could secure the border not 1 idea11 m
+
 EMOTION: hope	CAUSE: the apple event tomorrow is a 6s	TWEET: @tyler_mercado " i hope the apple event tomorrow is a 6s "
+
 EMOTION: hope	CAUSE: tomorrow goes good also	TWEET: i hope niall's day was better than the other day . hope tomorrow goes good also
+
 EMOTION: hope	CAUSE: dj's misfortune turns into something positive on monday	TWEET: dustin johnson is fast becoming the greg norman of bad luck in golf majors . i hope dj's misfortune turns into something positive on monday .
+
 EMOTION: great	CAUSE: see sun girl in last days of ant-man	TWEET: great to see sun girl in last days of ant-man . be great if she survived secret wars ! do the right thing @marvel =) http://t.co/z85bzlud89
+
 EMOTION: love	CAUSE: i	TWEET: i would love to have cavani man . he's over shawdowed and played 2nd fiddle to zlatan he would shine at arsenal
+
 EMOTION: furious	CAUSE: all the ads	TWEET: anybody else getting furious about all the ads / articles filled with #walkingdead & #got spoilers ? #mad #furious #sad #spoileralert
+
 EMOTION: sad	CAUSE: i really wanted to go to the pride parade	TWEET: i couldn't get aug 16 off i'm so sad i really wanted to go to the pride parade
+
 EMOTION: sure	CAUSE: briana wanted to like brooks	TWEET: @bravotv i'm sure briana wanted to like brooks back whn vicki 1st strtd dating him . she wldnt just make this stuff up . he has a dark side !
+
 EMOTION: hope	CAUSE: you never experience those type of christians for me in god	TWEET: " i hope you never experience those type of christians . for me , in god i am strong enough , i can deal with it , may be you wouldn't be able to . "
+
 EMOTION: hope	CAUSE: he's ready for brock lesnar on sunday	TWEET: @astroscounty i hope he's ready for brock lesnar on sunday .
+
