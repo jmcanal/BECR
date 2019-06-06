@@ -1,5 +1,8 @@
 #!/bin/sh
 
+file = '../data/preprocessed/split/filtered_tweets_test.txt'
+output = '../results/baseline/recall_filtered_test_25.txt'
+
 ec_file='../outputs/BECR/test_out.txt'
 gold_file='BECR/25_recall.txt'
 precision_file_10='BECR/top_10_precision.txt'

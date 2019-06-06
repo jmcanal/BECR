@@ -9,6 +9,7 @@ np.set_printoptions(threshold=sys.maxsize)
 import pickle
 from src.baseline.openie_tweet_loader import TweetLoader
 
+
 class EmotionCauseRuleExtractor:
     """
     Apply rules to extract emotion causes from tweets
@@ -185,13 +186,11 @@ class EmotionCauseRuleExtractor:
         if not emotion and self.is_emoverb(phrase3, tag3):
             emotion, cause = self.apply_emoverb_rule(phrase3)
 
-
         if not emotion or not cause:
             return None
 
         emo_cause = "emotion: " + emotion + ", cause: " +  cause + "\n"
         return self.tweets[idx], emo_cause
-
 
     def get_emotion_word(self, phrase):
         """
@@ -227,6 +226,7 @@ def main():
         for line in tweet_emo_cause:
             print(line[0], file=out)
             print(line[1], file=out)
+
 
 if __name__ == "__main__":
     main()

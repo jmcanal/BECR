@@ -8,32 +8,53 @@ import random
 from difflib import SequenceMatcher
 
 
-class EmoCause:
+class EmotionCause:
+    """
+    Emotion Cause Object to evaluate similarity
+    """
 
-    def __init__(self, tweet, emo, cause, relaxed):
+    def __init__(self, tweet, emotion, cause, relaxed):
+        """
+        Initialize with tweet, emotion and cause
+        :param tweet: the original tweet text
+        :param emotion: the emotion string
+        :param cause: the cause string
+        :param relaxed: is this a relaxed comparison
+        """
         self.tweet = tweet
-        self.emo = emo
+        self.emotion = emotion
         self.cause = cause
-        self.percent = 0.99 if relaxed else 0.7
+        self.threshold = 0.99 if relaxed else 0.7
 
     def __eq__(self, other):
+        """
+        Two EmotionCause objects are equal if the sequence matcher ratio for their tweets, emotions and causes is
+        below the threshold
+        :param other: the other object
+        :return:
+        """
         t_sim = SequenceMatcher(a=self.tweet, b=other.tweet).ratio()
-        tweet_eq = t_sim > self.percent
-        e_sim = SequenceMatcher(a=self.emo, b=other.emo).ratio()
-        emo_eq = e_sim > self.percent
+        tweet_eq = t_sim > self.threshold
+        e_sim = SequenceMatcher(a=self.emotion, b=other.emo).ratio()
+        emo_eq = e_sim > self.threshold
         c_sim = SequenceMatcher(a=self.cause, b=other.cause).ratio()
-        cause_eq = c_sim > self.percent
+        cause_eq = c_sim > self.threshold
         return tweet_eq and emo_eq and cause_eq
 
     def __hash__(self):
-        return hash(self.emo + self.cause)
+        """
+        The hash for an object is the hash of its emotion and cause
+        :return:
+        """
+        return hash(self.emotion + self.cause)
 
 
 def load_emo_causes(emotion_cause_file, relaxed=False):
     """
-    Load emotion cause results into a list of tuples
+    Load emotion cause results into a list of EmotionCause objects
     :param emotion_cause_file: an emotion cause file
-    :return: list of tuples
+    :param relaxed: is this a relaxed evaluation
+    :return: list of EmotionCause objects
     """
     with open(emotion_cause_file, mode='r', errors='ignore') as ec:
         tweets = ec.read()
@@ -48,15 +69,17 @@ def load_emo_causes(emotion_cause_file, relaxed=False):
         emotion = tweet_info[0].split(':')[1].strip()
         cause = tweet_info[1].split(':')[1].strip()
 
-        emotion_cause_list.add(EmoCause(tweet_text, emotion, cause, relaxed))
+        emotion_cause_list.add(EmotionCause(tweet_text, emotion, cause, relaxed))
 
     return emotion_cause_list
 
-def calculate_recall(cause_file, gold_file, total, relaxed=False):
+
+def calculate_recall(cause_file, gold_file, relaxed=False):
     """
     Calculate recall based on the randomly sampled labeled file
     :param cause_file: the emotion cause output file
     :param gold_file: the labeled file
+    :param relaxed: is this a relaxed evaluation
     :return: the recall value
     """
     gold_labels = load_emo_causes(gold_file, relaxed)
@@ -66,9 +89,10 @@ def calculate_recall(cause_file, gold_file, total, relaxed=False):
 
     return (25. - float(missing)) / 25.
 
+
 def pull_precision(cause_file, precision_file):
     """
-    Randomly sample 20 tweets to label for precision
+    Randomly sample 25 tweets to label for precision
     :param cause_file: the emotion cause output file
     :param precision_file: the labeled file
     :return: void
@@ -80,10 +104,13 @@ def pull_precision(cause_file, precision_file):
         for emo_cause in sample_emo_causes:
             print("EMOTION: " + emo_cause[1] + "\tCAUSE: " + emo_cause[2] + '\tTWEET: ' + emo_cause[0], file=p)
 
+
 def get_precision(precision_file, total, relaxed=False):
     """
     Calculate precision from the labeled precision file
     :param precision_file: the labeled precision file
+    :param total: the total number of samples
+    :param relaxed: is this a relaxed evaluation or not
     :return: the precision value
     """
     with open(precision_file, 'r', errors='ignore') as p:
@@ -98,6 +125,7 @@ def get_precision(precision_file, total, relaxed=False):
 
     return float(correct) / float(total)
 
+
 def calculate_f_score(precision, recall):
     """
     Calculate F score from the precision and recall values
@@ -106,6 +134,7 @@ def calculate_f_score(precision, recall):
     :return: the f-score value
     """
     return (2. * precision * recall) / (precision + recall)
+
 
 def main():
     """
@@ -118,6 +147,7 @@ def main():
     output_file = sys.argv[4]
     total = sys.argv[5]
 
+    # calculate strict eval numbers
     with open(output_file, 'w') as out:
         recall = calculate_recall(emotion_cause_file, gold_label_file, total)
         print("Recall: " + str(recall), file=out)
@@ -129,8 +159,9 @@ def main():
             print("Precision: " + str(precision), file=out)
             print("F-Score: " + str(f_score), file=out)
 
+    # calculate relaxed eval numbers
     with open(output_file + '_relaxed', 'w') as out:
-        recall = calculate_recall(emotion_cause_file, gold_label_file, total, True)
+        recall = calculate_recall(emotion_cause_file, gold_label_file, total)
         print("Recall: " + str(recall), file=out)
         if os.stat(precision_file).st_size == 0:
             pull_precision(emotion_cause_file, precision_file)

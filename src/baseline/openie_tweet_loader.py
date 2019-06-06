@@ -3,6 +3,7 @@ Load openie parsed tweets
 """
 from nltk import pos_tag
 
+
 class TweetLoader:
     """
     Processes OpenIE outputs

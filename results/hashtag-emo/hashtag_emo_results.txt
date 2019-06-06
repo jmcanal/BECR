@@ -1,3 +1,0 @@
-Recall: 0.4
-Precision: 0.5
-F-Score: 0.4444444444444445
