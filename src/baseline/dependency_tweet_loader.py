@@ -2,6 +2,8 @@
 Load dependency parsed tweets
 """
 import sys
+import os.path
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import pickle
 from collections import defaultdict as dd
 from src.baseline.word_node import WordNode as Word

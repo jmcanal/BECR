@@ -11,4 +11,4 @@
 
 # build the keyword lexicon
 kw_lexicon='../../lib/emotion_lexicon/emotion_kw_list/emotion_keywords.txt'
-python build_lexicon.py ${kw_lexicon} 'kw'
+/opt/python-3.6/bin/python3.6 build_lexicon.py ${kw_lexicon} 'kw'
