@@ -40,7 +40,7 @@ class Seed:
         :return: vector
         """
         context_embedding = np.full(self.glove_size, 1.e-28)
-        for word in context:    # todo: fix the tokenization; glove has: 's, 'm; twokenizer has i'm, it's
+        for word in context:
             if word in Seed.glove_embeddings.keys():
                 word_vec = np.array(Seed.glove_embeddings[word])
                 context_embedding += word_vec
