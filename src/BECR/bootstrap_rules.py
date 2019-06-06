@@ -62,7 +62,7 @@ class RuleBootstrapper:
             emo, cause, sentence = ex
             cause_rawtext = " ".join([w.text for w in cause])
             emo_rawtext = " ".join([w.text for w in emo.phrase])
-            if emo_rawtext in neg_seed_pairs.keys():  # todo: some refactoring here
+            if emo_rawtext in neg_seed_pairs.keys():
                 if cause_rawtext in neg_seed_pairs[emo_rawtext]:
                     emo.bad_seed = True
                     new_seed = Seed(emo, cause, tweet_objects[emo.tweet_idx], self.glove_size)
@@ -159,7 +159,7 @@ class RuleBootstrapper:
                             if cos_sim > tau:
                                 max_cosine = cos_sim if cos_sim > max_cosine else max_cosine
 
-                if max_cosine > 0 and not candidate_seed.bad:  #todo: maybe some refactoring here
+                if max_cosine > 0 and not candidate_seed.bad:
                     new_seeds.append(candidate_seed)
                     candidate_seed.emo.seed = True
                     candidate_seed.cosine = max_cosine
@@ -173,7 +173,7 @@ class RuleBootstrapper:
         if self.is_test:
             self.new_test_seeds.extend(new_seeds)
         else:
-            seed_matches.extend(new_seeds)  # todo: if we want the system to learn new seed matches at test phase, add this step to test phase
+            seed_matches.extend(new_seeds)
 
 
     def set_all_contexts(self, emo_list, tweet_objects):
@@ -211,7 +211,7 @@ class RuleBootstrapper:
             for i in range(self.cycles):
                 self.find_new_relations(candidates, seed_matches, self.tau, i+1)
             return seed_matches
-        else:  # todo: check -- currently this only cycles through train seeds once; no additional seeds are added
+        else:  # run one cycle in test phase
             self.find_new_relations(candidates, seed_matches, self.tau, 0)
             return self.new_test_seeds
 

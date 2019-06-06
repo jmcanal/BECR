@@ -50,7 +50,7 @@ class BECRTweetLoader(TweetLoader):
 
     def get_word_context(self, word, tweet):
         """
-        Get full word context up to two preceding words, capturing negation todo: and emphasis, e.g. "so"? TBD
+        Get full word context up to two preceding words, capturing negation
         :param word: Word object, an emotion word
         :param tweet: Tweet object corresponding to emo word
         :return:
@@ -60,17 +60,14 @@ class BECRTweetLoader(TweetLoader):
         prev_prev = tweet.words[word.idx - 3] if word.idx > 1 else None
 
         # Not currently capturing longer-distance negation, or lots of modals
-        # e.g. I would have been happy if we went there or I don't usually really like sushi
+        # e.g. "I would have been happy if we went there" or "I don't usually really like sushi"
         if prev:
-            # "not afraid"
-            if prev.text in self.NEGATION:
+            # looking for examples like: "not afraid" or "so excited"
+            if prev.text in self.NEGATION or prev.pos in self.ADVERB:
                 word_context.insert(0, prev)
-            # "so excited"
-            if prev.pos in self.ADVERB:
-                word_context.insert(0, prev)
-            elif prev_prev:
-                # Looking for examples like: "Don't really like" or "Won't be happy"
+            if prev_prev:
+                # Looking for examples like: "Don't really like," "Won't be happy," or "so very happy"
                 if prev_prev.text in self.NEGATION and (prev.pos in self.ADVERB or prev.pos in self.VERB):
-                    word_context = [prev_prev, prev] + word_context
+                    word_context = [prev_prev, prev] + [word]
 
         return word_context
