@@ -1,6 +1,5 @@
 """
-Script for converting labeled training data
-to seed dictionary for BECR algorithm
+Script for converting labeled training data to seed dictionary for BECR algorithm
 """
 
 import sys
@@ -15,6 +14,12 @@ class LabelToSeed:
     labels = []
 
     def find_emo_cause(self, tweet_file, label_file):
+        """
+        Find the emotion causes
+        :param tweet_file: tokenized tweet file
+        :param label_file: labeled tweet file
+        :return: void
+        """
         with open(tweet_file, 'r') as t:
             for words in t:
                 words = words.split()
@@ -30,7 +35,12 @@ class LabelToSeed:
         self.pickle_seeds()
 
     def extract_emo_cause(self, labels, words):
-
+        """
+        Extract the emotions and causes
+        :param labels: list of labels
+        :param words: list of words
+        :return: void
+        """
         emo_flag = False
         cause_flag = False
         emo = []
@@ -90,12 +100,16 @@ class LabelToSeed:
                     self.seeds[" ".join(emo)].append(" ".join(cause))
 
     def pickle_seeds(self):
+        """
+        Pickle the seed data
+        :return: void
+        """
         pickle.dump(self.seeds, open('../../lib/seeds/train_seeds.pkl', 'wb'))
 
 
 def main():
     """
-    Filter tweets by emotion lexicon
+    Convert labeled tweets to training seeds for the BECR algorithm
     :return: void
     """
     tweet_tokens = sys.argv[1]

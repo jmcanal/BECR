@@ -1,6 +1,8 @@
 """
 A node of the dependency parse
 """
+
+
 class WordNode:
     """
     Word Class captures information about words, including POS, dependencies,
@@ -17,13 +19,14 @@ class WordNode:
         """
         self.idx = int(word_feats[0])
         self.text = word_feats[1].lower()
-        self.original_text = word_feats[1]  # String object of word that preserves capitalization
+        # String object of word that preserves capitalization
+        self.original_text = word_feats[1]
         self.pos = word_feats[3]
         self.parent = int(word_feats[6])
         self.mw = word_feats[7] if word_feats[7] in self.MWE_CONJ else None
         self.tweet_idx = tweet
         self.children = []
-        self.emo = False    # Is an emotion word
+        self.is_emotion_word = False
         self.seed = None
         self.bad_seed = None
         self.phrase = []

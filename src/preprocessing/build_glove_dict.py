@@ -5,10 +5,10 @@ Process GLoVe .txt files and create pickle files for embedding dictionaries
 import sys
 import pickle
 
-GLOVE_SIZE = 200
-
 
 class GloveVectors:
+
+    GLOVE_SIZE = 200
 
     def __init__(self, file):
         self.file = file
@@ -16,23 +16,30 @@ class GloveVectors:
         self.lib_path = '../lib/glove/'
 
     def make_embeddings(self):
+        """
+        Make the embeddings dictionary
+        :return: void
+        """
         with open(self.file, 'r') as f:
             for line in f:
                 line = line.split()
                 word = line[0]
                 embedding = [float(n) for n in line[1:]]
                 self.glove_embeddings[word] = embedding
-        # return self.glove_embeddings
 
     def save_embeddings(self):
+        """
+        Pickle the glove embedding dictionary
+        :return: void
+        """
         self.make_embeddings()
-        filename = "glove" + str(GLOVE_SIZE) + ".pkl"
+        filename = "glove" + str(self.GLOVE_SIZE) + ".pkl"
         pickle.dump(self.glove_embeddings, open(self.lib_path + filename, 'wb'))
 
 
 def main():
     """
-    Apply rules to Tweeboparser outputs and return emotion-cause relations when found for tweets
+    Pickle the GloVe Embeddings
     :return: void
     """
     glove = sys.argv[1]

@@ -12,18 +12,18 @@ from src.baseline.dependency_rule_extractor import EmotionCauseRuleExtractor
 class BECREmotionCauseRuleExtractor(EmotionCauseRuleExtractor):
     """
     Apply rules to extract emotion causes from tweets
-    Expanded from Base Dependency Rule Extractor to include
-    additional candidate emo-cause relation pairs
+    Expanded from Base Dependency Rule Extractor to include additional candidate emo-cause relation pairs
     """
 
     def apply_rules(self, emo_word):
-        # Function to grab as examples of emotions and potential causes
-        # Acts as pre-processing step to create a set of emo-cause pairs
-        # to search first for seed examples
-        # and then to find extensions
-        # emo_word = emo_context[-1]
-        deps1 = []
-        deps2 = []
+        """
+        Function to grab as examples of emotions and potential causes
+        Acts as pre-processing step to create a set of emo-cause pairs to search first for seed examples and then to
+        find extensions
+        :param emo_word: the emotion word (emo_context[-1]
+        :return: list of emotion cause tuples
+        """
+        deps1, deps2 = [], []
         if emo_word.pos in self.VERBS and emo_word.has_children():
             if emo_word.parent and emo_word.parent.text in self.MODALS and emo_word.parent.pos == 'V':
                 # Apply Rule 2

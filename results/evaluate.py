@@ -24,7 +24,14 @@ class EmotionCause:
         self.tweet = tweet
         self.emotion = emotion
         self.cause = cause
-        self.threshold = 0.99 if relaxed else 0.7
+        self.threshold = 0.7 if relaxed else 0.99
+
+    def same_tweet(self, other):
+        this_tweet = self.tweet.lower()
+        other_tweet = other.tweet.lower()
+        t_sim = SequenceMatcher(a=this_tweet, b=other_tweet).ratio()
+        tweet_eq = t_sim > self.threshold
+        return tweet_eq
 
     def __eq__(self, other):
         """
@@ -33,20 +40,18 @@ class EmotionCause:
         :param other: the other object
         :return:
         """
-        t_sim = SequenceMatcher(a=self.tweet, b=other.tweet).ratio()
-        tweet_eq = t_sim > self.threshold
-        e_sim = SequenceMatcher(a=self.emotion, b=other.emo).ratio()
+        e_sim = SequenceMatcher(a=self.emotion, b=other.emotion).ratio()
         emo_eq = e_sim > self.threshold
         c_sim = SequenceMatcher(a=self.cause, b=other.cause).ratio()
         cause_eq = c_sim > self.threshold
-        return tweet_eq and emo_eq and cause_eq
+        return self.same_tweet(other) and emo_eq and cause_eq
 
     def __hash__(self):
         """
         The hash for an object is the hash of its emotion and cause
         :return:
         """
-        return hash(self.emotion + self.cause)
+        return hash((self.emotion, self.cause))
 
 
 def load_emo_causes(emotion_cause_file, relaxed=False):
@@ -65,7 +70,7 @@ def load_emo_causes(emotion_cause_file, relaxed=False):
         if not tweet:
             continue
         tweet_info = tweet.split('\t')
-        tweet_text = tweet_info[2].split(':')[1].strip()
+        tweet_text = " ".join(tweet_info[2].split(':')[1:]).strip()
         emotion = tweet_info[0].split(':')[1].strip()
         cause = tweet_info[1].split(':')[1].strip()
 
@@ -85,7 +90,13 @@ def calculate_recall(cause_file, gold_file, relaxed=False):
     gold_labels = load_emo_causes(gold_file, relaxed)
     emo_causes = load_emo_causes(cause_file, relaxed)
 
-    missing = len(gold_labels.intersection(emo_causes))
+    missing = len(gold_labels - emo_causes)
+    no_relations = [ec for ec in gold_labels if ec.emotion == "None" and ec.cause == "None"]
+    for ec in no_relations:
+        matches = [tweet for tweet in emo_causes if tweet.same_tweet(ec)]
+        # if the gold file indicates no relation, and the output excludes the tweet, it should not be considered missing
+        if not matches:
+            missing -= 1
 
     return (25. - float(missing)) / 25.
 
@@ -161,7 +172,7 @@ def main():
 
     # calculate relaxed eval numbers
     with open(output_file + '_relaxed', 'w') as out:
-        recall = calculate_recall(emotion_cause_file, gold_label_file, total)
+        recall = calculate_recall(emotion_cause_file, gold_label_file, True)
         print("Recall: " + str(recall), file=out)
         if os.stat(precision_file).st_size == 0:
             pull_precision(emotion_cause_file, precision_file)

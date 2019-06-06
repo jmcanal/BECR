@@ -4,8 +4,8 @@ Load dependency parsed tweets
 import sys
 import pickle
 from collections import defaultdict as dd
-from src.word_node import WordNode as Word
-from src.tweet import Tweet
+from src.baseline.word_node import WordNode as Word
+from src.baseline.tweet import Tweet
 
 
 class TweetLoader:
@@ -48,7 +48,7 @@ class TweetLoader:
                 # Isolate emotion words that are Verbs or Adjectives
                 if curr_word.text in self.emo_kws and curr_word.pos in self.POS_LIST:
                     self.tweet2emo[tweet_idx].append(curr_word)
-                    curr_word.emo = True
+                    curr_word.is_emotion_word = True
 
                 tweet_tokens.append(curr_word.text)
 

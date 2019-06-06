@@ -129,6 +129,7 @@ def main():
         for emotion, cause, sentence in emo_list:
             cause = " ".join([d.text for d in cause])
             print("EMOTION: " + emotion.text + "\tCAUSE: " + cause + "\tTWEET: " + sentence, file=out)
+            print("", file=out)
 
 
 if __name__ == "__main__":

@@ -4,33 +4,33 @@ Seed object to represent seed examples for bootstrapping
 import numpy as np
 import pickle
 
+
 class Seed:
 
-    glove_embeddings = None
+    glove_embeddings = emo_embedding = cause_embedding = cosine = cycle = bad = None
+    bef, btwn, aft = [], [], []
 
-    def __init__(self, emo, cause, tweet, glove_size):
+    def __init__(self, emotion, cause, tweet, glove_size):
         """
         Initialize by setting the emotion and cause values
-        :param emo:
-        :param cause:
-        :param tweet:
+        :param emotion: emotion phrase
+        :param cause: cause phrase
+        :param tweet: tweet text
+        :param glove_size: the size of GLoVe embeddings to use
         """
-        self.emo = emo
+        self.emotion = emotion
         self.cause = cause
-        self.emo_embedding = None
-        self.cause_embedding = None
         self.tweet = tweet
-        self.bef = []
-        self.btwn = []
-        self.aft = []
-        self.cosine = None
-        self.cycle = None
         self.glove_size = glove_size
-        self.bad = None
 
     @staticmethod
     def load_glove_embeddings(glove_size):
-        glove_file = '../../lib/glove/glove' + (str(glove_size)) + '.pkl'
+        """
+        Load the GLoVe embedding files
+        :param glove_size: the size of the file to order
+        :return: void
+        """
+        glove_file = '../../lib/glove/glove' + str(glove_size) + '.pkl'
         Seed.glove_embeddings = pickle.load(open(glove_file, 'rb'))
 
     def calc_glove_score(self, context):

@@ -14,18 +14,14 @@ semeval516_test='../data/semeval-2016/5_pt/eng/twitter-2016test-CE.txt'
 semeval18_train='../data/semeval-2018/2018-E-c-En-train.txt'
 semeval18_dev='../data/semeval-2018/2018-E-c-En-dev.txt'
 semeval18_test='../data/semeval-2018/2018-E-c-En-test.txt'
-electoral='../data/electoraltweets/all.txt'
 
-python3 filter_by_emotion.py ${hashtag} 'dm' 'hashtag' 'tweets'
-python3 filter_by_emotion.py ${hashtag} 'nrc' 'hashtag' 'tweets'
-python3 filter_by_emotion.py ${hashtag} 'kwsyns' 'hashtag' 'tweets'
+# code to filter data by other lexicons
+#python3 filter_by_emotion.py ${hashtag} 'dm' 'hashtag' 'tweets'
+#python3 filter_by_emotion.py ${hashtag} 'nrc' 'hashtag' 'tweets'
+#python3 filter_by_emotion.py ${hashtag} 'kwsyns' 'hashtag' 'tweets'
+
+# filter all the datasets by the keyword list and output them to the same file
 python3 filter_by_emotion.py ${hashtag} 'kw' 'hashtag' 'tweets'
-
-python3 filter_by_emotion.py ${electoral} 'dm' 'electoral' 'labeled_tweets'
-python3 filter_by_emotion.py ${electoral} 'nrc' 'electoral' 'labeled_tweets'
-python3 filter_by_emotion.py ${electoral} 'kwsyns' 'electoral' 'labeled_tweets'
-python3 filter_by_emotion.py ${electoral} 'kw' 'electoral' 'labeled_tweets'
-
 python3 filter_by_emotion.py ${semeval215_train} 'kw' 'semeval16' 'tweets'
 python3 filter_by_emotion.py ${semeval215_test} 'kw' 'semeval16' 'tweets'
 python3 filter_by_emotion.py ${semeval216_train} 'kw' 'semeval16' 'tweets'
