@@ -11,11 +11,13 @@ The performance summaries, or evaluation outputs, are printed to text files labe
 
 To run the bash script directly:
 
-`./becr_eval.sh`
+`./run_becr_evaluation.sh`
 
-Alternatively, to run directly from the command line, bypassing the bash script, run the following in one line:
+Alternatively, to run directly from the command line, bypassing the bash script, run the following two lines:
 
-`/opt/python-3.6/bin/python3.6 dependency_rule_extractor.py ../../outputs/tb_parser/filtered_tweets_test.out ../../outputs/baseline/tb_test.txt`
+`/opt/python-3.6/bin/python3.6 evaluate.py ../outputs/BECR/test_out.txt recall_file.txt BECR/top_10_precision.txt BECR/10_results 10`
+
+`/opt/python-3.6/bin/python3.6 evaluate.py ../outputs/BECR/test_out.txt recall_file.txt BECR/top_25_precision.txt BECR/25_results 25`
 
 For output files, see directory `../zoe_julia/results/BECR`
 
@@ -30,11 +32,11 @@ Files:
 
 To run the bash script directly:
 
-`./baseline_eval.sh`
+`./run_baseline_evaluation.sh`
 
 Alternatively, to run directly from the command line, bypassing the bash script, run the following in one line:
 
-`/opt/python-3.6/bin/python3.6 dependency_rule_extractor.py ../../outputs/tb_parser/filtered_tweets_test.out ../../outputs/baseline/tb_test.txt`
+`/opt/python-3.6/bin/python3.6 evaluate.py ../outputs/baseline/tb_test.txt recall_file.txt baseline/precision_baseline.txt baseline/results 25`
 
 For output files, see directory `../zoe_julia/results/baseline`
 

@@ -45,7 +45,7 @@ class BECRTweetLoader(TweetLoader):
                 if word.text in self.emo_kws and word.pos in self.POS_LIST:
                     word_context = self.get_word_context(word, tweet)
                     self.tweet2emo[tweet_idx].append(word)
-                    word.emo = True
+                    word.emotion = True
                     word.phrase = word_context
 
     def get_word_context(self, word, tweet):

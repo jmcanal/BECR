@@ -138,7 +138,7 @@ class RuleBootstrapper:
         for candidate_seed in candidate_seeds:
 
             # If this seed is already a match or a bad seed, skip it
-            if candidate_seed.emo.seed or candidate_seed.emo.bad_seed:
+            if candidate_seed.emotion.seed or candidate_seed.emotion.bad_seed:
                 continue
 
             max_cosine = 0
@@ -158,13 +158,13 @@ class RuleBootstrapper:
 
             if max_cosine > 0 and not candidate_seed.bad:
                 new_seeds.append(candidate_seed)
-                candidate_seed.emo.seed = True
+                candidate_seed.emotion.seed = True
                 candidate_seed.cosine = max_cosine
                 candidate_seed.cycle = cycle
 
             elif candidate_seed.bad:
                 new_seeds.append(candidate_seed)
-                candidate_seed.emo.bad_seed = True
+                candidate_seed.emotion.bad_seed = True
                 candidate_seed.cosine = 0
                 candidate_seed.cycle = cycle
 
@@ -226,7 +226,7 @@ class RuleBootstrapper:
 
         with open(output, 'w') as out:
             for seed in sorted(seed_matches, key=lambda x: -x.cosine):
-                emo_text = " ".join([s.text for s in seed.emo.phrase])
+                emo_text = " ".join([s.text for s in seed.emotion.phrase])
                 cause_text = " ".join([d.text for d in seed.cause])
                 relation = "EMOTION: " + emo_text + "\tCAUSE: " + cause_text + "\tTWEET:" + seed.tweet.raw
                 print(str(seed.cosine) + " " + relation, file=out)
