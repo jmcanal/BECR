@@ -1,0 +1,16 @@
+0.9999999999999999 EMOTION: not sure	CAUSE: kane didn't start	TWEET:" Not sure why Kane didn't start , he's miles infront of Vardy and also needs more international experience and goals for Tuesday game !! "
+
+0.9999999999999999 EMOTION: so happy	CAUSE: see that	TWEET:So happy to see that Royal Blood are now supporting the Foo Fighters at Milton Keynes on 5 September .. As well ... http://t.co/VEJQmnM3ZZ
+
+0.9999999999999999 EMOTION: hope	CAUSE: it comes true	TWEET:The other night I had a dream UGA beat Boise State . Let's hope it comes true
+
+0.9999999999999999 EMOTION: good	CAUSE: hell	TWEET:NW Road . This shit good as hell
+
+0.9960913487054176 EMOTION: just love	CAUSE: opening my mailbox and finding it full of christmas cards	TWEET:I just love opening my mailbox and finding it full of Christmas cards .
+
+0.9858112237223238 EMOTION: probably disappointed	CAUSE: i don't care he's going to see ac/dc tomorrow	TWEET:Guy I'm working with probably disappointed that I don't care he's going to see AC/DC tomorrow
+
+0.9845374176137364 EMOTION: how bad	CAUSE: i can be at video games and how too trigger happy at times	TWEET:The Sorrow is grim reminder of how bad I can be at video games and how I could get a bit too trigger happy at times . RIP #MGS3
+
+0.9697777761263632 EMOTION: happy	CAUSE: times	TWEET:The Sorrow is grim reminder of how bad I can be at video games and how I could get a bit too trigger happy at times . RIP #MGS3
+

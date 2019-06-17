@@ -4,7 +4,7 @@ Load dependency parsed tweets for BECR algorithm
 import sys
 import os.path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from src.word_node import WordNode as Word
+from src.baseline.word_node import WordNode as Word
 from src.baseline.dependency_tweet_loader import TweetLoader
 
 
@@ -20,7 +20,7 @@ class BECRTweetLoader(TweetLoader):
         Extract emotion words and dependency relations from tweets
         Modified from Baseline TweetLoader to store emotions as lists
         of Word objects instead of single Word objects
-        :return:
+        :return: void
         """
         for tweet_idx, tweet in enumerate(self.tweets):
             tweet_tokens = []
@@ -45,7 +45,7 @@ class BECRTweetLoader(TweetLoader):
                 if word.text in self.emo_kws and word.pos in self.POS_LIST:
                     word_context = self.get_word_context(word, tweet)
                     self.tweet2emo[tweet_idx].append(word)
-                    word.emo = True
+                    word.emotion = True
                     word.phrase = word_context
 
     def get_word_context(self, word, tweet):
@@ -53,7 +53,7 @@ class BECRTweetLoader(TweetLoader):
         Get full word context up to two preceding words, capturing negation
         :param word: Word object, an emotion word
         :param tweet: Tweet object corresponding to emo word
-        :return:
+        :return: list of context words
         """
         word_context = [word]
         prev = tweet.words[word.idx - 2] if word.idx > 0 else None

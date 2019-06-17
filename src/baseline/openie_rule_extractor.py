@@ -1,6 +1,7 @@
 """
 Baseline rule-based system for emotion cause extraction of tweets
 """
+
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
@@ -8,6 +9,7 @@ import numpy as np
 np.set_printoptions(threshold=sys.maxsize)
 import pickle
 from src.baseline.openie_tweet_loader import TweetLoader
+
 
 class EmotionCauseRuleExtractor:
     """
@@ -185,13 +187,11 @@ class EmotionCauseRuleExtractor:
         if not emotion and self.is_emoverb(phrase3, tag3):
             emotion, cause = self.apply_emoverb_rule(phrase3)
 
-
         if not emotion or not cause:
             return None
 
-        emo_cause = "emotion: " + emotion + ", cause: " +  cause + "\n"
+        emo_cause = emotion + ", " +  cause + "\n"
         return self.tweets[idx], emo_cause
-
 
     def get_emotion_word(self, phrase):
         """
@@ -225,8 +225,12 @@ def main():
 
     with open(output, "w") as out:
         for line in tweet_emo_cause:
-            print(line[0], file=out)
-            print(line[1], file=out)
+            emotion_cause = line[1].split(", ")
+            emotion = emotion_cause[0]
+            cause = emotion_cause[1].rstrip()
+            tweet = line[0].lstrip()
+            print("EMOTION: " + emotion + "\tCAUSE: " + cause + "\tTWEET: " + tweet, file=out)
+
 
 if __name__ == "__main__":
     main()

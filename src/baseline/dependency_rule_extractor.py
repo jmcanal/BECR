@@ -8,6 +8,7 @@ import os.path
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 from src.baseline.dependency_tweet_loader import TweetLoader
 
+
 class EmotionCauseRuleExtractor:
     """
     Apply rules to extract emotion causes from tweets
@@ -84,7 +85,6 @@ class EmotionCauseRuleExtractor:
         else:
             return self.strip_prepositions(rhs) if rhs else None
 
-
     def strip_prepositions(self, phrase):
         """
         Strip prepositions, conjunctions from dependent phrase
@@ -105,18 +105,10 @@ class EmotionCauseRuleExtractor:
         """
         emo_list = []
         for tweet_id, words in emo_words.items():
-            # sys.stderr.write("\nsentence_{}".format(tweet_id) + ": " + idx2tweets[tweet_id])
             for word in words:
                 emo, cause = self.apply_rules(word)
                 if cause:
-                    # sys.stderr.write("EMOTION: " + emo.text + ", CAUSE: " + " ".join([d.text for d in cause]))
                     emo_list.append((emo, cause, idx2tweets[tweet_id]))
-                # elif emo:
-                #     sys.stderr.write("EMOTION: " + emo.text + ", NO CAUSE FOUND")
-                #     continue
-                # else:
-                #     sys.stderr.write("NO EMOTION FOUND / NO CAUSE FOUND")
-                #     continue
         return sorted(emo_list)
 
 
@@ -137,6 +129,7 @@ def main():
         for emotion, cause, sentence in emo_list:
             cause = " ".join([d.text for d in cause])
             print("EMOTION: " + emotion.text + "\tCAUSE: " + cause + "\tTWEET: " + sentence, file=out)
+            print("", file=out)
 
 
 if __name__ == "__main__":
