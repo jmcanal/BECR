@@ -11,7 +11,7 @@ Most files contain unlabeled Tweets, but the `annotated` folder contains Tweets 
 
 Contains external libraries, dictionaries and keyword lists used in the different phases of the project. The library also contains pickle files from Seeds in the training phase. The `test_seeds.pkl` file is used as the "model" in the test phase of BECR.
 
-The TweeboParser dependency parser is not included in this package because of the large size of its model and parser files. 
+The TweeboParser dependency parser and the GloVe Twitter embedings are not included in this package because of their large file sizes. See http://www.cs.cmu.edu/~ark/TweetNLP/ for the TweeboParser and https://nlp.stanford.edu/projects/glove/ for GloVe Twitter embeddings. 
 
 ## Directory: outputs
 
